@@ -1,0 +1,158 @@
+.add-product-container {
+   max-width: 600px;
+   margin: 40px auto;
+   padding: 60px;
+   background-color: #fff;
+   border-radius: 8px;
+   box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.13);
+}
+
+.add-product-container h2 {
+   text-align: center;
+   margin-bottom: 30px;
+   color: #333;
+}
+
+.add-product-container form {
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+}
+
+.add-product-container label {
+   font-weight: 600;
+   color: #555;
+}
+
+.add-product-container input,
+.add-product-container textarea {
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   font-size: 16px;
+   transition: border-color 0.3s;
+}
+
+.add-product-container input:focus,
+.add-product-container textarea:focus {
+   border-color: #007bff;
+   outline: none;
+}
+
+.add-product-container textarea {
+   resize: vertical;
+   min-height: 80px;
+}
+
+.add-product-container button {
+   width: 100%;
+   padding: 10px 15px;
+   background-color: #007bff;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   font-size: 16px;
+   font-weight: bold;
+   cursor: pointer;
+   transition: background-color 0.3s;
+   width: max-content;
+   align-self: center;
+}
+
+.add-product-container button:hover {
+   background-color: #0056b3;
+}
+
+/* Poziționează toast-ul corect */
+.Toastify__toast {
+   position: relative;
+   padding-right: 36px !important;
+}
+
+/* Stilizare buton X */
+.Toastify__close-button {
+   position: absolute !important;
+   top: 50% !important;
+   right: 12px !important;
+   transform: translateY(-50%) !important;
+   border: none !important;
+   background: transparent !important;
+   padding: 0 !important;
+   width: 20px !important;
+   height: 20px !important;
+   display: flex !important;
+   align-items: center !important;
+   justify-content: center !important;
+   cursor: pointer;
+   box-shadow: none !important;
+}
+
+/* Elimină efecte de focus */
+.Toastify__close-button:focus {
+   outline: none !important;
+   box-shadow: none !important;
+}
+
+/* Poți schimba culoarea X-ului aici */
+.Toastify__close-button svg {
+   stroke: #000;
+}
+
+select {
+    padding: 10px;
+    font-size: 15px;
+}
+
+@media screen and (max-width: 768px) {
+   .add-product-container {
+      padding: 30px 20px;
+      margin: 20px;
+   }
+
+   .add-product-container form {
+      gap: 14px;
+   }
+
+   .add-product-container input,
+   .add-product-container textarea,
+   .add-product-container select {
+      font-size: 15px;
+      padding: 9px;
+   }
+
+   .add-product-container button {
+      font-size: 15px;
+      padding: 10px 20px;
+   }
+
+   .add-product-container h2 {
+      font-size: 1.5rem;
+   }
+}
+
+@media screen and (max-width: 480px) {
+   .add-product-container {
+      padding: 20px 15px;
+   }
+
+   .add-product-container h2 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+   }
+
+   .add-product-container label {
+      font-size: 14px;
+   }
+
+   .add-product-container input,
+   .add-product-container textarea,
+   .add-product-container select {
+      font-size: 14px;
+      padding: 8px;
+   }
+
+   .add-product-container button {
+      font-size: 14px;
+      padding: 8px 16px;
+   }
+}

@@ -1,0 +1,245 @@
+.product-detail-container {
+   max-width: 1100px;
+   margin: 60px auto;
+   padding: 20px;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 40px;
+}
+
+.image-section {
+   flex: 1 1 400px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.carousel-container {
+   position: relative;
+   width: 600px;
+   height: 550px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden;
+   border-radius: 8px;
+   background-color: #f0f0f0;
+   box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.13);
+}
+
+.card-details-image {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   object-position: center;
+   display: block;
+   transition: opacity 0.3s ease;
+}
+
+.carousel-button {
+   position: absolute;
+   transform: translateY(-50%);
+   background-color: rgba(0, 0, 0, 0.5);
+   border: none;
+   color: white;
+   font-size: 28px;
+   padding: 12px 16px;
+   border-radius: 50%;
+   cursor: pointer;
+   z-index: 2;
+   transition: background-color 0.3s ease;
+   bottom: -15px;
+}
+
+.carousel-button:hover {
+   background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-button.left {
+   left: 450px;
+}
+
+.carousel-button.right {
+   right: 10px;
+}
+
+.info-section {
+   flex: 1 1 400px;
+   background-color: #fff;
+   border-radius: 8px;
+   box-shadow: 0 0 30px rgba(0, 255, 255, 0.08);
+   padding: 30px 25px;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.info-section h2 {
+   font-size: 30px;
+   margin-bottom: 10px;
+   text-align: center;
+   color: #222;
+}
+
+.info-section p {
+   font-size: 16px;
+   line-height: 1.6;
+   color: #555;
+}
+
+.info-section p strong {
+   color: orangered;
+   font-weight: 600;
+}
+
+.size-selector-details {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 10px;
+   margin-top: 10px;
+}
+
+.size-button {
+   background-color: #f0f0f0;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   padding: 10px 15px;
+   cursor: pointer;
+   font-size: 16px;
+   transition: background-color 0.3s;
+}
+
+.size-button:hover {
+   background-color: #dcdcdc;
+}
+
+.size-button.selected {
+   background-color: #ff7f50;
+   color: white;
+   font-weight: bold;
+   border: 1px solid #ff7f50;
+}
+
+.addBag {
+   padding: 20px 35px;
+   border: none;
+   color: #fff;
+   background: #000;
+   width: 80%;
+   border-radius: 50px;
+   align-self: center;
+   font-weight: bold;
+   font-size: 16px;
+   margin-top: 20px;
+   cursor: pointer;
+   transition: background 0.3s ease;
+}
+
+.addBag:hover {
+   background: #0000008b;
+}
+
+.carousel-image-wrapper {
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.carousel-indicator {
+   position: absolute;
+   bottom: 10px;
+   left: 10px;
+   background-color: rgba(0, 0, 0, 0.6);
+   color: white;
+   padding: 4px 8px;
+   border-radius: 12px;
+   font-size: 14px;
+   font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+   .product-detail-container {
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+   }
+
+   .carousel-button.left {
+      left: 10px;
+   }
+
+   .carousel-button.right {
+      right: 10px;
+   }
+
+   .card-details-image {
+      max-width: 90vw;
+   }
+
+   .info-section {
+      width: 100%;
+   }
+}
+
+@media screen and (max-width: 480px) {
+   .product-detail-container {
+      padding: 10px;
+      margin: 30px auto;
+      gap: 20px;
+   }
+
+   .carousel-container {
+      width: 90vw;
+      height: 300px;
+   }
+
+   .carousel-button {
+      padding: 8px 10px;
+      font-size: 20px;
+      bottom: -10px;
+   }
+
+   .carousel-button.left {
+      left: 5px;
+   }
+
+   .carousel-button.right {
+      right: 5px;
+   }
+
+   .card-details-image {
+      height: 100%;
+      object-fit: contain;
+   }
+
+   .info-section {
+      padding: 20px 15px;
+      gap: 15px;
+   }
+
+   .info-section h2 {
+      font-size: 22px;
+   }
+
+   .info-section p {
+      font-size: 14px;
+   }
+
+   .size-button {
+      padding: 8px 12px;
+      font-size: 14px;
+   }
+
+   .addBag {
+      width: 100%;
+      padding: 14px 25px;
+      font-size: 15px;
+   }
+
+   .carousel-indicator {
+      font-size: 12px;
+      padding: 3px 6px;
+   }
+}

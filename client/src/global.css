@@ -1,0 +1,21 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   background: linear-gradient(
+      135deg,
+      #f0f4ff 0%,
+      #d8ecff 40%,
+      #c1f0f6 70%,
+      #e0ffe9 100%
+   );
+   color: black;
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+&::-webkit-scrollbar {
+   display: none;
+}

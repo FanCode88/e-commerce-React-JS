@@ -1,0 +1,109 @@
+.edit-container {
+   max-width: 600px;
+   margin: 0 auto;
+   padding: 60px;
+   box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.13);
+   background: #fff;
+   border-radius: 8px;
+}
+
+h2 {
+   text-align: center;
+}
+
+.edit-form {
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+   width: 400px;
+   height: 500px;
+   margin-top: 30px;
+}
+
+.edit-form input,
+.edit-form textarea {
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   font-size: 16px;
+}
+
+.edit-form button {
+   background-color: #1976d2;
+   color: white;
+   padding: 10px 15px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-weight: bold;
+   width: max-content;
+   align-self: center;
+}
+
+.edit-form button:hover {
+   background-color: #1565c0;
+}
+
+label {
+   font-weight: bold;
+   font-size: 17px;
+   font-weight: bold;
+}
+
+.center {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   min-height: 100vh;
+}
+
+@media screen and (max-width: 768px) {
+   .edit-container {
+      padding: 30px 20px;
+      margin: 20px;
+   }
+
+   .edit-form {
+      width: 100%;
+      height: auto;
+   }
+
+   .edit-form input,
+   .edit-form textarea {
+      font-size: 15px;
+   }
+
+   .edit-form button {
+      padding: 10px 20px;
+      font-size: 15px;
+   }
+
+   label {
+      font-size: 16px;
+   }
+}
+
+@media screen and (max-width: 480px) {
+   .edit-container {
+      padding: 20px 15px;
+   }
+
+   h2 {
+      font-size: 1.4rem;
+   }
+
+   .edit-form input,
+   .edit-form textarea {
+      font-size: 14px;
+      padding: 8px;
+   }
+
+   .edit-form button {
+      font-size: 14px;
+      padding: 8px 16px;
+   }
+
+   label {
+      font-size: 15px;
+   }
+}

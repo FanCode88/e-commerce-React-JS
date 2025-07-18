@@ -1,0 +1,312 @@
+.home-page {
+    cursor: default;
+}
+
+/* HERO VIDEO */
+.hero-video {
+   position: relative;
+   height: 70vh;
+   overflow: hidden;
+}
+
+.background-video {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+.video-overlay {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: white;
+   text-align: center;
+   background: rgba(0, 0, 0, 0.4);
+   padding: 2rem 3rem;
+   border-radius: 10px;
+   max-width: 90%;
+}
+
+.video-overlay h1 {
+   font-size: 3rem;
+   margin-bottom: 1rem;
+}
+
+.video-overlay p {
+   font-size: 1.25rem;
+   margin-bottom: 2rem;
+}
+
+.shop-now {
+   background: #00e3cc;
+   color: black;
+   padding: 12px 30px;
+   font-weight: bold;
+   border-radius: 50px;
+   text-decoration: none;
+   transition: background 0.3s ease;
+}
+
+.shop-now:hover {
+   background: #02cbb6;
+}
+
+/* PRODUSE NOI - SLIDER */
+.new-arrivals {
+   max-width: 1200px;
+   margin: 3rem auto;
+   padding: 0 1rem;
+}
+
+.new-arrivals h2 {
+   font-size: 2.25rem;
+   margin-bottom: 1.5rem;
+   text-align: center;
+}
+
+.product-slider .slick-slide {
+   padding: 0 10px;
+}
+
+.product-card {
+   background: white;
+   border-radius: 10px;
+   overflow: hidden;
+   box-shadow: 0 10px 30px rgb(0 0 0 / 0.1);
+   text-align: center;
+   cursor: pointer;
+   transition: transform 0.3s ease;
+   padding-bottom: 1rem;
+}
+
+.product-card:hover {
+   transform: scale(1.05);
+}
+
+.product-card img {
+   width: 100%;
+   height: 280px;
+   object-fit: cover;
+   border-bottom: 1px solid #eee;
+}
+
+.product-card p {
+   margin: 0.8rem 0 0.3rem;
+   font-weight: 600;
+   color: #111;
+}
+
+.product-card span {
+   color: #555;
+   font-weight: 500;
+}
+
+/* COLECȚII */
+.collections {
+   display: flex;
+   justify-content: center;
+   gap: 2rem;
+   margin: 4rem 1rem;
+}
+
+.collection {
+   flex: 1;
+   max-width: 350px;
+   height: 450px;
+   border-radius: 10px;
+   position: relative;
+   cursor: pointer;
+   box-shadow: 0 10px 25px rgb(0 0 0 / 0.15);
+   transition: transform 0.3s ease;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.collection:hover {
+   transform: scale(1.05);
+}
+
+/* Culori colecții */
+.collection.men {
+   background: url('/assets/man.png') center/cover no-repeat;
+   object-fit: cover;
+}
+
+.collection.women {
+   background: url('/assets/woman.png') center/cover no-repeat;
+   object-fit: cover;
+}
+.collection.children {
+   background: url('/assets/children.png') center/cover no-repeat;
+   object-fit: cover;
+}
+
+.btnCollect {
+   padding: 25px 75px;
+   border: none;
+   border-radius: 50px;
+   font-size: 19px;
+   font-weight: bold;
+   background: transparent;
+   backdrop-filter: blur(25px);
+   color: white;
+   cursor: pointer;
+   transition: ease-in-out 0.3s;
+   box-shadow: 0 10px 25px rgb(0 0 0 / 0.15);
+}
+
+.btnCollect:hover {
+   background: rgba(255, 255, 255, 0.177);
+}
+
+/* BENEFICII */
+.benefits {
+   max-width: 900px;
+   margin: 4rem auto;
+   display: flex;
+   justify-content: space-around;
+   gap: 2rem;
+   padding: 0 1rem;
+   text-align: center;
+}
+
+.benefit-box {
+   background: white;
+   padding: 1.5rem 1rem;
+   border-radius: 10px;
+   box-shadow: 0 10px 20px rgb(0 0 0 / 0.1);
+   flex: 1;
+   cursor: default;
+}
+
+.benefit-box h4 {
+   margin: 1rem 0 0.5rem;
+   color: #111;
+}
+
+.benefit-box p {
+   color: #555;
+   font-weight: 500;
+}
+
+/* Icone beneficii */
+.benefit-box svg {
+   color: #00e3cc;
+}
+
+/* Responsive */
+/* ... stilurile tale existente ... */
+
+/* === Responsive Tablet (max-width: 900px) === */
+@media (max-width: 900px) {
+   .collections {
+      flex-direction: column;
+      max-width: 90%;
+      margin: 2rem auto;
+   }
+
+   .collection {
+      height: 250px;
+      max-width: 100%;
+   }
+
+   .new-arrivals h2 {
+      font-size: 1.75rem;
+   }
+
+   .benefits {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+   }
+
+   .video-overlay {
+      padding: 1.5rem 2rem;
+   }
+
+   .video-overlay h1 {
+      font-size: 2.25rem;
+   }
+
+   .video-overlay p {
+      font-size: 1.1rem;
+   }
+
+   .shop-now {
+      padding: 10px 25px;
+      font-size: 0.95rem;
+   }
+}
+
+/* === Responsive Mobile (max-width: 600px) === */
+@media (max-width: 600px) {
+   .hero-video {
+      height: 50vh;
+   }
+
+   .video-overlay {
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+   }
+
+   .video-overlay h1 {
+      font-size: 1.75rem;
+   }
+
+   .video-overlay p {
+      font-size: 1rem;
+   }
+
+   .shop-now {
+      padding: 10px 20px;
+      font-size: 0.85rem;
+   }
+
+   .new-arrivals h2 {
+      font-size: 1.5rem;
+   }
+
+   .product-card img {
+      height: 200px;
+   }
+
+   .product-card p {
+      font-size: 0.95rem;
+   }
+
+   .product-card span {
+      font-size: 0.85rem;
+   }
+
+   .collections {
+      margin-top: 2rem;
+   }
+
+   .collection {
+      height: 180px;
+   }
+
+   .btnCollect {
+      padding: 15px 35px;
+      font-size: 1rem;
+   }
+
+   .benefits {
+      flex-direction: column;
+      padding: 0 1rem;
+   }
+
+   .benefit-box {
+      padding: 1rem;
+   }
+
+   .benefit-box h4 {
+      font-size: 1rem;
+   }
+
+   .benefit-box p {
+      font-size: 0.9rem;
+   }
+}
