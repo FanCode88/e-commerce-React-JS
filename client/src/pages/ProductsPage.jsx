@@ -151,7 +151,10 @@ const ProductsPage = () => {
    // Calculează produsele pentru pagina curentă
    const indexOfLastProduct = currentPage * productsPerPage;
    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-   const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+   const currentProducts = products.slice(
+      indexOfFirstProduct,
+      indexOfLastProduct
+   );
    const totalPages = Math.ceil(products.length / productsPerPage);
 
    return (
@@ -253,7 +256,7 @@ const ProductsPage = () => {
          </div>
 
          {/* Paginație */}
-         <div className="pagination">
+         <div className='pagination'>
             {[...Array(totalPages)].map((_, index) => {
                const pageNum = index + 1;
                return (
