@@ -1,14 +1,14 @@
-/* ==========================================================================
-   ⚡ DESIGN INTERACTIV - HOME PAGE COMPACT CORECTAT
-   ========================================================================== */
 .creative-cyber-vision {
   background-color: #0b0c10;
   color: #ffffff;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   overflow-x: hidden;
 }
 
-/* 🎬 HERO BANNER */
 .hero-video {
   position: relative;
   height: 80vh;
@@ -19,7 +19,10 @@
 
 .video-container {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
 }
 
@@ -31,13 +34,19 @@
 
 .video-darkener {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(90deg, rgba(11, 12, 16, 0.95) 30%, rgba(11, 12, 16, 0.4) 100%);
 }
 
 .hero-bottom-gradient {
   position: absolute;
-  bottom: 0; left: 0; width: 100%; height: 150px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
   background: linear-gradient(to top, #0b0c10, transparent);
   z-index: 2;
 }
@@ -98,7 +107,6 @@
   transform: translateY(-3px);
 }
 
-/* 👟 PRODUSE NOI (SLIDER BRUTALIST) */
 .new-arrivals {
   max-width: 1200px;
   margin: 6rem auto 4rem;
@@ -118,7 +126,7 @@
   letter-spacing: 2px;
   margin: 0;
   white-space: nowrap;
-  color: #dddd;
+  color: #dddddd;
 }
 
 .title-line {
@@ -193,10 +201,13 @@
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
-.product-card-creative:hover img { transform: scale(1.08); }
-.product-card-creative:hover .view-product-link { color: #00e3cc; }
+.product-card-creative:hover img {
+  transform: scale(1.08);
+}
+.product-card-creative:hover .view-product-link {
+  color: #00e3cc;
+}
 
-/* 🖼️ COLECȚII INTERACTIVE */
 .collections-creative {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -215,27 +226,53 @@
   text-decoration: none;
   overflow: hidden;
   border-radius: 4px;
-  transition: all 0.5s ease;
+  transition: transform 0.5s ease;
 }
 
-.collection-card.men { background: url('/assets/1.png') center/cover no-repeat; }
-.collection-card.women { background: url('/assets/3.png') center/cover no-repeat; }
-.collection-card.children { background: url('/assets/2.png') center/cover no-repeat; }
+.collection-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 0;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.collection-card.men::before {
+  background-image: url('/assets/1.png');
+}
+.collection-card.women::before {
+  background-image: url('/assets/3.png');
+}
+.collection-card.children::before {
+  background-image: url('/assets/2.png');
+}
 
 .image-overlay-layer {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(to top, rgba(11, 12, 16, 0.95) 10%, rgba(11, 12, 16, 0.1) 80%);
   z-index: 1;
-  transition: background 0.3s ease;
+  transition: background 0.4s ease;
 }
 
-.collection-content { position: relative; z-index: 2; }
+.collection-content {
+  position: relative;
+  z-index: 2;
+}
 
 .collection-content h3 {
   font-size: 2.3rem;
   font-weight: 900;
-  color: #dddd;
+  color: #dddddd;
   margin: 0 0 10px 0;
   letter-spacing: -1px;
 }
@@ -249,15 +286,23 @@
   transition: all 0.3s ease;
 }
 
-.collection-card:hover { transform: scale(0.99); }
-.collection-card:hover .image-overlay-layer {
-  background: linear-gradient(to top, rgba(0, 227, 204, 0.75) 0%, rgba(11, 12, 16, 0.2) 100%);
+.collection-card:hover {
+  transform: scale(0.99);
 }
-.collection-card:hover .collection-link-text { color: #ffffff; opacity: 1; }
 
-/* ==========================================================================
-   ⚙️ NOUA IMPLEMENTARE: BARĂ DE UTILITIES IMPLEMENTATĂ JOS (FOOTER BAR)
-   ========================================================================== */
+.collection-card:hover::before {
+  transform: scale(1.05);
+}
+
+.collection-card:hover .image-overlay-layer {
+  background: linear-gradient(to top, rgba(11, 12, 16, 0.98) 15%, rgba(11, 12, 16, 0.4) 100%);
+}
+
+.collection-card:hover .collection-link-text {
+  color: #ffffff;
+  opacity: 1;
+}
+
 .benefits-bottom-bar {
   background: #11141c;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -282,7 +327,6 @@
   padding: 10px;
 }
 
-/* Efect discret la delimitarea taburilor */
 .benefit-utility-tab:not(:last-child) {
   border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -310,22 +354,42 @@
   line-height: 1.5;
 }
 
-/* ==========================================================================
-   📱 MEDIA RESPONSIVE FLUID
-   ========================================================================== */
 @media (max-width: 1024px) {
-  .hero-video { padding-left: 5%; height: 70vh; }
-  .video-overlay h1 { font-size: 2.8rem; }
-  .collections-creative { grid-template-columns: 1fr; gap: 20px; }
-  .collection-card { height: 380px; }
+  .hero-video {
+    padding-left: 5%;
+    height: 70vh;
+  }
+  .video-overlay h1 {
+    font-size: 2.8rem;
+  }
+  .collections-creative {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .collection-card {
+    height: 380px;
+  }
 
-  /* Resetăm separatoarele pe ecrane medii/mici */
-  .benefits-inner-container { grid-template-columns: 1fr; gap: 25px; }
-  .benefit-utility-tab:not(:last-child) { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 20px; }
+  .benefits-inner-container {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .benefit-utility-tab:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 20px;
+  }
 }
 
 @media (max-width: 600px) {
-  .hero-video { height: 55vh; padding: 20px; }
-  .video-overlay h1 { font-size: 2.2rem; }
-  .product-img-container { height: 260px; }
+  .hero-video {
+    height: 55vh;
+    padding: 20px;
+  }
+  .video-overlay h1 {
+    font-size: 2.2rem;
+  }
+  .product-img-container {
+    height: 260px;
+  }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import './AdminDashboard.css'; // Asigură-te că ai și fișierul de CSS importat corect
+import './AdminDashboard.css';
 import { toast } from 'react-toastify';
 
 const AdminDashboard = () => {
@@ -62,9 +62,6 @@ const AdminDashboard = () => {
   if (loading) return <div className='centered-container'>Se încarcă panoul admin...</div>;
   if (error) return <div className='centered-container'>{error}</div>;
 
-  /* =========================================================================
-     🔥 CORECTARE ERORARE LINIA 65 (Filtrare securizată cu Optional Chaining)
-     ========================================================================= */
   const filteredOrders = orders.filter((order) => {
     const sTerm = searchTerm?.toLowerCase() || '';
 

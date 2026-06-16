@@ -1,158 +1,179 @@
 .add-product-container {
-   max-width: 600px;
-   margin: 40px auto;
-   padding: 60px;
-   background-color: #fff;
-   border-radius: 8px;
-   box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.13);
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 60px;
+  background-color: #1e293b;
+  border-radius: 8px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .add-product-container h2 {
-   text-align: center;
-   margin-bottom: 30px;
-   color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #ffffff;
 }
 
 .add-product-container form {
-   display: flex;
-   flex-direction: column;
-   gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .add-product-container label {
-   font-weight: 600;
-   color: #555;
+  font-weight: 600;
+  color: #94a3b8;
+  font-size: 15px;
 }
 
 .add-product-container input,
-.add-product-container textarea {
-   padding: 10px;
-   border: 1px solid #ccc;
-   border-radius: 5px;
-   font-size: 16px;
-   transition: border-color 0.3s;
+.add-product-container textarea,
+.add-product-container select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #0f172a;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
 .add-product-container input:focus,
-.add-product-container textarea:focus {
-   border-color: #007bff;
-   outline: none;
+.add-product-container textarea:focus,
+.add-product-container select:focus {
+  border-color: #00e3cc;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 227, 204, 0.15);
+  background-color: #111827;
 }
 
 .add-product-container textarea {
-   resize: vertical;
-   min-height: 80px;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.add-product-container select {
+  padding: 10px;
+  font-size: 15px;
+  cursor: pointer;
 }
 
 .add-product-container button {
-   width: 100%;
-   padding: 10px 15px;
-   background-color: #007bff;
-   color: white;
-   border: none;
-   border-radius: 5px;
-   font-size: 16px;
-   font-weight: bold;
-   cursor: pointer;
-   transition: background-color 0.3s;
-   width: max-content;
-   align-self: center;
+  padding: 12px 25px;
+  background-color: #ffffff;
+  color: #0f172a;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: max-content;
+  align-self: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .add-product-container button:hover {
-   background-color: #0056b3;
+  background-color: #00e3cc;
+  color: #0f172a;
+  box-shadow: 0 0 20px rgba(0, 227, 204, 0.4);
 }
 
-/* Poziționează toast-ul corect */
 .Toastify__toast {
-   position: relative;
-   padding-right: 36px !important;
+  position: relative;
+  padding-right: 36px !important;
+  background-color: #1e293b !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px !important;
 }
 
-/* Stilizare buton X */
 .Toastify__close-button {
-   position: absolute !important;
-   top: 50% !important;
-   right: 12px !important;
-   transform: translateY(-50%) !important;
-   border: none !important;
-   background: transparent !important;
-   padding: 0 !important;
-   width: 20px !important;
-   height: 20px !important;
-   display: flex !important;
-   align-items: center !important;
-   justify-content: center !important;
-   cursor: pointer;
-   box-shadow: none !important;
+  position: absolute !important;
+  top: 50% !important;
+  right: 12px !important;
+  transform: translateY(-50%) !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer;
+  box-shadow: none !important;
+  color: #64748b !important;
+  opacity: 0.7;
 }
 
-/* Elimină efecte de focus */
+.Toastify__close-button:hover {
+  color: #ff4d4f !important;
+  opacity: 1;
+}
+
 .Toastify__close-button:focus {
-   outline: none !important;
-   box-shadow: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-/* Poți schimba culoarea X-ului aici */
 .Toastify__close-button svg {
-   stroke: #000;
-}
-
-select {
-   padding: 10px;
-   font-size: 15px;
+  stroke: currentColor;
 }
 
 @media screen and (max-width: 768px) {
-   .add-product-container {
-      padding: 30px 20px;
-      margin: 20px;
-   }
+  .add-product-container {
+    padding: 30px 20px;
+    margin: 20px;
+  }
 
-   .add-product-container form {
-      gap: 14px;
-   }
+  .add-product-container form {
+    gap: 14px;
+  }
 
-   .add-product-container input,
-   .add-product-container textarea,
-   .add-product-container select {
-      font-size: 15px;
-      padding: 9px;
-   }
+  .add-product-container input,
+  .add-product-container textarea,
+  .add-product-container select {
+    font-size: 15px;
+    padding: 9px;
+  }
 
-   .add-product-container button {
-      font-size: 15px;
-      padding: 10px 20px;
-   }
+  .add-product-container button {
+    font-size: 15px;
+    padding: 10px 20px;
+  }
 
-   .add-product-container h2 {
-      font-size: 1.5rem;
-   }
+  .add-product-container h2 {
+    font-size: 1.5rem;
+  }
 }
 
 @media screen and (max-width: 480px) {
-   .add-product-container {
-      padding: 20px 15px;
-   }
+  .add-product-container {
+    padding: 20px 15px;
+  }
 
-   .add-product-container h2 {
-      font-size: 1.3rem;
-      margin-bottom: 20px;
-   }
+  .add-product-container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
 
-   .add-product-container label {
-      font-size: 14px;
-   }
+  .add-product-container label {
+    font-size: 14px;
+  }
 
-   .add-product-container input,
-   .add-product-container textarea,
-   .add-product-container select {
-      font-size: 14px;
-      padding: 8px;
-   }
+  .add-product-container input,
+  .add-product-container textarea,
+  .add-product-container select {
+    font-size: 14px;
+    padding: 8px;
+  }
 
-   .add-product-container button {
-      font-size: 14px;
-      padding: 8px 16px;
-   }
+  .add-product-container button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 }

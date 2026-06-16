@@ -3,10 +3,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 32px;
-  background-color: #1f2937;
+  background-color: #0f172a;
   color: white;
   cursor: default;
   position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .logo {
@@ -14,6 +15,11 @@
   font-weight: bold;
   text-decoration: none;
   color: white;
+  transition: color 0.2s ease;
+}
+
+.logo:hover {
+  color: #00e3cc;
 }
 
 .nav {
@@ -24,57 +30,56 @@
 
 .nav-link {
   text-decoration: none;
-  color: white;
+  color: #94a3b8;
   font-weight: 500;
-  transition: opacity 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .nav-link:hover {
-  text-decoration: underline;
-  opacity: 0.9;
+  text-decoration: none;
+  color: #ffffff;
 }
 
-.logout-button {
-  background-color: #dc2626;
+.logout-button,
+.products {
+  background-color: rgba(255, 255, 255, 0.08);
   color: white;
-  padding: 5px 10px;
-  border: none;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 5px;
   cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .logout-button:hover {
-  background-color: #b91c1c;
+  background-color: #dc2626;
+  border-color: #dc2626;
+}
+
+.products:hover {
+  background-color: #00e3cc;
+  color: #0f172a;
+  border-color: #00e3cc;
 }
 
 .user-text {
   font-size: 14px;
   margin-right: 8px;
-  color: aliceblue;
-}
-
-.products {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  background: #dc2626;
-  color: #fff;
-  cursor: pointer;
-}
-
-.products:hover {
-  background: #b91c1c;
+  color: #94a3b8;
 }
 
 .a-products {
-  color: rgba(241, 135, 135, 0.99);
+  color: #00e3cc;
   text-decoration: none;
   font-weight: bold;
   font-size: 18px;
+  transition: opacity 0.2s;
 }
 
 .a-products:hover {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #00e3cc;
+  opacity: 0.9;
 }
 
 .cart-icon-wrapper {
@@ -85,6 +90,7 @@
 
 h4 {
   margin-bottom: 20px;
+  color: #ffffff;
 }
 
 .cart-badge {
@@ -92,32 +98,36 @@ h4 {
   top: -5px;
   right: -5px;
   background: #00e3cc;
-  color: black;
+  color: #0f172a;
   font-size: 12px;
+  font-weight: 800;
   border-radius: 50%;
   padding: 2px 6px;
+  box-shadow: 0 0 10px rgba(0, 227, 204, 0.4);
 }
 
 .cart-popup {
   position: absolute;
   top: 65px;
   right: 20px;
-  background: white;
-  color: black;
+  background: rgba(30, 41, 59, 0.95);
+  color: #ffffff;
   width: 320px;
   border-radius: 10px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.4);
   padding: 1rem;
   z-index: 100;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   max-height: 430px;
   overflow-y: auto;
   opacity: 0;
   transform: translateY(-20px);
   pointer-events: none;
   transition:
-    opacity 0.3s ease-in-out,
-    transform 0.3s ease-in-out;
+    opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cart-popup.open {
@@ -133,7 +143,7 @@ h4 {
   gap: 15px;
   margin-bottom: 1.2rem;
   padding-bottom: 0.8rem;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .cart-item img {
@@ -143,6 +153,7 @@ h4 {
   min-height: 65px;
   object-fit: cover;
   border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: opacity 0.2s ease;
 }
@@ -162,7 +173,7 @@ h4 {
 .header-cart-title {
   font-size: 14px;
   font-weight: 600;
-  color: #111827;
+  color: #ffffff;
   margin: 0;
   cursor: pointer !important;
   display: block;
@@ -172,38 +183,36 @@ h4 {
 }
 
 .header-cart-title:hover {
-  text-decoration: underline !important;
-  opacity: 0.8;
+  text-decoration: none !important;
+  color: #00e3cc;
 }
 
 .cart-item p {
   margin: 0;
   font-size: 13px;
-  color: #4b5563;
+  color: #94a3b8;
 }
 
 .cart-item p:last-of-type {
   font-weight: bold;
-  color: #111827;
+  color: #ffffff;
 }
 
 .delete-item {
   background: none;
   border: none;
   cursor: pointer;
-  color: #9ca3af;
+  color: #64748b;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px;
   flex-shrink: 0;
-  transition:
-    color 0.2s,
-    transform 0.2s;
+  transition: all 0.2s;
 }
 
 .delete-item:hover {
-  color: #dc2626 !important;
+  color: #ff4d4f !important;
   transform: scale(1.1);
 }
 
@@ -214,42 +223,48 @@ h4 {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background: #131720;
-  color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+}
+
+.view-bag-btn {
+  background: #0f172a;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .header-checkout-btn {
   background: #00e3cc;
-  color: #131720;
+  color: #0f172a;
 }
 
 .view-bag-btn:hover {
-  background: #252d3d;
+  background: #1e293b;
+  color: #00e3cc;
 }
 
 .header-checkout-btn:hover {
-  background: #00c2af;
+  background: #ffffff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
 .cart-item-size {
-  font-size: 0.9rem;
-  color: #555;
+  font-size: 0.85rem;
+  color: #00e3cc;
   margin-top: 4px;
 }
 
 .close-right {
   width: 30px;
   height: 30px;
-  border: 2px solid black;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   border-bottom-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: #000;
+  background: #0f172a;
 }
 
 .head {
@@ -264,20 +279,24 @@ h4 {
   display: flex;
   background: none;
   border: none;
-  font-size: 24px;
-  color: #fff;
+  font-size: 20px;
+  color: #64748b;
   cursor: pointer;
   font-weight: bold;
+  transition: color 0.2s;
+}
+
+.cart-close:hover {
+  color: #ffffff;
 }
 
 .empty-cart {
   padding: 2rem;
   text-align: center;
-  font-size: 1.2rem;
-  color: #888;
+  font-size: 1.1rem;
+  color: #64748b;
 }
 
-/* Containerul special pentru link-ul de Admin din Header */
 .nav-admin-link-wrapper {
   position: relative;
   display: inline-flex;
@@ -285,7 +304,7 @@ h4 {
   margin-right: 15px;
   font-weight: bold;
   text-decoration: none;
-  color: #f18787;
+  color: #ff6b6b;
   font-size: 16px;
   transition: opacity 0.2s ease;
 }
@@ -295,7 +314,6 @@ h4 {
   opacity: 0.9;
 }
 
-/* Stilul cercului roșu pulsatil */
 .admin-notification-badge {
   position: absolute;
   top: -8px;
@@ -311,18 +329,18 @@ h4 {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 8px rgba(255, 56, 56, 0.7);
+  box-shadow: 0 0 10px rgba(255, 56, 56, 0.8);
   animation: adminPulse 1.5s infinite ease-in-out;
 }
 
 @keyframes adminPulse {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(255, 56, 56, 0.7);
+    box-shadow: 0 0 0 0 rgba(255, 56, 56, 0.6);
   }
   70% {
     transform: scale(1.15);
-    box-shadow: 0 0 0 5px rgba(255, 56, 56, 0);
+    box-shadow: 0 0 0 6px rgba(255, 56, 56, 0);
   }
   100% {
     transform: scale(1);
@@ -330,7 +348,6 @@ h4 {
   }
 }
 
-/* RESPONSIVENESS REVIZUIT */
 @media (max-width: 768px) {
   .header {
     flex-wrap: wrap;
@@ -380,6 +397,7 @@ h4 {
     right: 10px;
     width: 90vw;
     max-width: 320px;
+    background: rgba(30, 41, 59, 0.98);
   }
 }
 

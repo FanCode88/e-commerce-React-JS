@@ -1,3 +1,7 @@
+/* ==========================================================================
+   ⚡ DESIGN INTERACTIV - CHECKOUT PAGE (Calibrat pentru noul fundal închis)
+   ========================================================================== */
+
 .checkout-container {
   max-width: 1200px;
   margin: 40px auto;
@@ -10,8 +14,10 @@
 h2 {
   font-size: 1.8rem !important;
   font-weight: bold !important;
+  color: #ffffff !important;
 }
 
+/* PANOUL DIN STÂNGA (Formulare) */
 .checkout-left {
   flex: 1 1 600px;
   display: flex;
@@ -19,10 +25,12 @@ h2 {
   gap: 30px;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.13);
-  background: white;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+  background: #1e293b; /* Înlocuit din alb, acum se potrivește cu cardurile tale */
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* PANOUL DIN DREAPTA (Sumar) */
 .checkout-right {
   display: flex;
   align-items: stretch;
@@ -30,33 +38,35 @@ h2 {
   flex-direction: column;
   gap: 24px;
   width: 400px;
-  background-color: #ffff;
+  background-color: #1e293b; /* Înlocuit din #ffff */
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.13);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .checkout-section {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Înlocuit din #ddd */
   padding-bottom: 20px;
 }
 
 .checkout-section h2 {
   font-size: 22px;
   margin-bottom: 15px;
-  color: black !important;
+  color: #ffffff !important; /* Corectat din black */
 }
 
+/* INPUTURI INTELEGENTE */
 .checkout-form input,
 .payment-details input {
   width: 100%;
   padding: 12px 16px !important;
   margin-bottom: 15px;
-  border: 2px solid #cbd5e1 !important;
+  border: 2px solid rgba(255, 255, 255, 0.1) !important; /* Înlocuit din #cbd5e1 */
   border-radius: 6px;
   font-size: 1.05rem !important;
-  color: #0f172a;
-  background-color: #fff;
+  color: #ffffff; /* Înlocuit din #0f172a */
+  background-color: #0f172a; /* Fundal adâncit închis pentru câmpurile de text */
   box-sizing: border-box;
   transition: all 0.2s ease-in-out;
 }
@@ -64,14 +74,14 @@ h2 {
 .checkout-form input:focus,
 .payment-details input:focus {
   outline: none;
-  border-color: #000000 !important;
-  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
-  background-color: #fafafa;
+  border-color: #00e3cc !important; /* Focus modern cu cianul tău semnătură */
+  box-shadow: 0 0 0 4px rgba(0, 227, 204, 0.15);
+  background-color: #111827;
 }
 
 .checkout-form input::placeholder,
 .payment-details input::placeholder {
-  color: #94a3b8;
+  color: #64748b; /* Gri soft pentru text ajutător */
   font-size: 0.95rem;
 }
 
@@ -93,15 +103,17 @@ h2 {
   margin-bottom: 0px;
 }
 
+/* ELEMENTE PRODUS DIN SUMAR */
 .cart-summary-item {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 15px;
-  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   padding: 15px;
-  background: #ffffff;
+  background: #0f172a; /* Un strat mai închis în interiorul panoului drept */
+  border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .cart-summary-item img {
@@ -111,7 +123,7 @@ h2 {
   min-height: 90px;
   object-fit: cover;
   border-radius: 6px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .cart-item-details {
@@ -120,19 +132,19 @@ h2 {
   flex-direction: column;
   gap: 4px;
   min-width: 0;
-  border-left: 3px solid black;
+  border-left: 3px solid #00e3cc; /* Înlocuit linia neagră cu accentul tău cian iconic */
   padding-left: 12px;
 }
 
 .cart-item-details p {
   margin: 0;
   font-size: 14px;
-  color: #4b5563;
+  color: #94a3b8; /* Gri fin */
   line-height: 1.4;
 }
 
 .cart-item-details p strong {
-  color: #111827;
+  color: #ffffff; /* Înlocuit din #111827 */
   font-size: 15px;
   display: block;
   white-space: nowrap;
@@ -140,11 +152,12 @@ h2 {
   text-overflow: ellipsis;
 }
 
+/* TOTAL */
 .summary-total {
   font-size: 16px;
   margin-top: 10px;
-  color: #000;
-  border-top: 1px dashed #ddd;
+  color: #ffffff; /* Înlocuit din #000 */
+  border-top: 1px dashed rgba(255, 255, 255, 0.1); /* Înlocuit din #ddd */
   padding-top: 15px;
 }
 
@@ -159,30 +172,35 @@ h2 {
   font-weight: bold;
   margin-top: 12px;
   padding-top: 8px;
-  border-top: 2px solid black;
+  border-top: 2px solid #00e3cc; /* Total evidențiat curat cu cian */
+  color: #00e3cc;
 }
 
+/* OPȚIUNI SHIPPING ȘI PAYMENT */
 .shipping-option,
 .payment-option {
-  border: 2px solid #ddd;
+  border: 2px solid rgba(255, 255, 255, 0.08); /* Înlocuit din #ddd */
   border-radius: 5px;
   padding: 15px;
   margin-bottom: 15px;
   cursor: pointer;
-  transition: 0.3s ease;
+  background-color: #0f172a;
+  color: #f1f5f9;
+  transition: all 0.3s ease;
 }
 
 .shipping-option:hover,
 .payment-option:hover {
-  border-color: black;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .shipping-option.selected,
 .payment-option.selected {
-  border: 2px solid black;
-  background-color: #f9f9f9;
+  border: 2px solid #00e3cc; /* Selectare clară neon/dark */
+  background-color: rgba(0, 227, 204, 0.05);
 }
 
+/* BUTON DE PLASARE COMANDĂ SOLIDA */
 .place-order-btn {
   width: 100%;
   padding: 15px;
@@ -190,40 +208,47 @@ h2 {
   font-weight: bold;
   border: none;
   border-radius: 5px;
-  background-color: black;
-  color: white;
+  background-color: #ffffff; /* Buton alb solid, contrast primar superb */
+  color: #0f172a;
   margin-top: 20px;
-  transition: background 0.3s;
+  transition: all 0.3s;
   cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .place-order-btn:hover {
-  background-color: #333;
+  background-color: #00e3cc; /* Se aprinde în cian electric la atingere */
+  box-shadow: 0 0 20px rgba(0, 227, 204, 0.5);
 }
 
 .payment-option input[type='radio'] {
   margin-right: 8px;
+  accent-color: #00e3cc; /* Radio button devine nativ cian pe browserele moderne */
 }
 
+/* POPUP CONFIRMARE */
 .order-confirmation-popup {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.75); /* Fundal din spate mai adâncit */
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(4px);
 }
 
 .order-confirmation-content {
-  background: white;
+  background: #1e293b; /* Înlocuit din white */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 2rem 3rem;
   border-radius: 8px;
   text-align: center;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
 }
 
 .order-confirmation-content button {
@@ -232,12 +257,20 @@ h2 {
   font-size: 1rem;
   cursor: pointer;
   border: none;
-  background-color: #007bff;
-  color: white;
+  background-color: #00e3cc; /* Schimbat din clasicul albastru bootstrap în cianul tău */
+  color: #0f172a;
+  font-weight: bold;
   border-radius: 4px;
+  transition: all 0.2s;
 }
 
-/* MEDIA QUERIES REPARATE */
+.order-confirmation-content button:hover {
+  background-color: #ffffff;
+}
+
+/* ==========================================================================
+   ⚡ MEDIA QUERIES ORIGINALE (Păstrate și adaptate pe culori discret)
+   ========================================================================== */
 @media screen and (max-width: 768px) {
   .checkout-container {
     flex-direction: column;
@@ -267,7 +300,7 @@ h2 {
   }
 
   .cart-item-details {
-    border-left: 2px solid black;
+    border-left: 2px solid #00e3cc;
     padding-top: 0;
     padding-left: 10px;
   }

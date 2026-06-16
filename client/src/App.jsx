@@ -85,7 +85,6 @@ function App() {
             }
           />
 
-          {/* 🔥 CORECTAT: Am securizat dashboard-ul cu AdminRoute, eliminând variabila problematică isAdmin */}
           <Route
             path='/admin/dashboard'
             element={
