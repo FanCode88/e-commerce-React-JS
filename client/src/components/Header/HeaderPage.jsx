@@ -1,179 +1,205 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { logout } from '../../features/auth/authSlice';
 import { ShoppingBag, Trash2 } from 'lucide-react';
 import { useCart } from '../Context/CartContext';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+import 'react-toastify/dist/ReactToastify.css';
 import './Header.css';
 
 const Header = () => {
-   const { token, user } = useSelector((state) => state.auth);
-   const dispatch = useDispatch();
-   const navigate = useNavigate();
-   const cartRef = useRef();
-   const iconRef = useRef();
-   const { cartItems, removeGroupFromCart } = useCart();
-   const [showCart, setShowCart] = useState(false);
+  const { token, user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-   const handleLogout = () => {
-      dispatch(logout());
-      navigate('/');
-   };
+  const cartRef = useRef();
+  const iconRef = useRef();
 
-   useEffect(() => {
-      const handleClickOutside = (e) => {
-         if (
-            cartRef.current &&
-            !cartRef.current.contains(e.target) &&
-            iconRef.current &&
-            !iconRef.current.contains(e.target)
-         ) {
-            setShowCart(false);
-         }
-      };
+  const { cartItems, removeGroupFromCart } = useCart();
+  const [showCart, setShowCart] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
 
-      const handleEscape = (e) => {
-         if (e.key === 'Escape') {
-            setShowCart(false);
-         }
-      };
+  const isAdmin = token && user?.isAdmin;
 
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('keydown', handleEscape);
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  };
 
-      return () => {
-         document.removeEventListener('mousedown', handleClickOutside);
-         document.removeEventListener('keydown', handleEscape);
-      };
-   }, []);
+  const handleNavigation = (e, path) => {
+    e.stopPropagation();
+    setShowCart(false);
+    navigate(path);
+  };
 
-   return (
-      <header className='header'>
-         <Link to='/' className='logo'>
-            MyStore
-         </Link>
+  useEffect(() => {
+    if (!isAdmin) return;
 
-         <nav className='nav'>
-            {token ? (
-               <>
-                  <span className='user-text'>
-                     Hi, {user?.name || 'Utilizator'}!
-                  </span>
+    const fetchUnreadCount = async () => {
+      try {
+        const res = await axios.get('http://localhost:8000/api/orders/unread-count');
+        setUnreadCount(res.data.count);
+      } catch (err) {
+        console.error('Eroare la preluarea notificărilor de comenzi:', err);
+      }
+    };
 
-                  <Link to='/products' className='nav-link'>
-                     Products
-                  </Link>
+    fetchUnreadCount();
 
-                  {user?.isAdmin && (
-                     <Link to='/add-product' className='a-products'>
-                        Add Products
-                     </Link>
-                  )}
+    const interval = setInterval(fetchUnreadCount, 10000);
+
+    return () => clearInterval(interval);
+  }, [isAdmin, location]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (cartRef.current && !cartRef.current.contains(e.target) && iconRef.current && !iconRef.current.contains(e.target)) {
+        setShowCart(false);
+      }
+    };
+
+    const handleEscape = (e) => {
+      if (e.key !== 'Escape' || !showCart) return;
+      setShowCart(false);
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [showCart]);
+
+  return (
+    <header className='header'>
+      <Link to='/' className='logo'>
+        MyStore
+      </Link>
+
+      <nav className='nav'>
+        {token ? (
+          <>
+            <span className='user-text'>Hi, {user?.name || 'Utilizator'}!</span>
+
+            <Link to='/products' className='nav-link'>
+              Products
+            </Link>
+
+            {isAdmin && (
+              <>
+                <Link to='/admin/dashboard' className='nav-admin-link-wrapper'>
+                  Panou Comenzi
+                  {unreadCount > 0 && <span className='admin-notification-badge'>{unreadCount}</span>}
+                </Link>
+                <Link to='/add-product' className='a-products'>
+                  Add Products
+                </Link>
+              </>
+            )}
+
+            <button type='button' onClick={handleLogout} className='logout-button'>
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to='/products'>
+              <button type='button' className='products'>
+                Products
+              </button>
+            </Link>
+
+            <Link to='/login' className='nav-link'>
+              Login
+            </Link>
+
+            <Link to='/register' className='nav-link'>
+              Register
+            </Link>
+          </>
+        )}
+
+        {token && (
+          <div className='cart-icon-wrapper' onClick={() => setShowCart(!showCart)} ref={iconRef}>
+            <ShoppingBag size={24} />
+            {cartItems.length > 0 && <span className='cart-badge'>{cartItems.length}</span>}
+          </div>
+        )}
+      </nav>
+
+      {token && (
+        <div className={`cart-popup ${showCart ? 'open' : ''}`} ref={cartRef}>
+          <div className='head'>
+            <div className='close-right'>
+              <button
+                type='button'
+                className='cart-close'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowCart(false);
+                }}
+              >
+                &times;
+              </button>
+            </div>
+          </div>
+
+          {cartItems.length === 0 ? (
+            <div className='empty-cart'>
+              <h4>Empty bag</h4>
+            </div>
+          ) : (
+            <>
+              <h4>Added to Bag</h4>
+
+              {cartItems.map((item) => (
+                <div className='cart-item' key={`${item.productId}-${item.size}`}>
+                  <img
+                    src={item.image?.[0] || '/fallback-image.png'}
+                    alt={item.name}
+                    onClick={(e) => handleNavigation(e, `/products/${item.productId}`)}
+                  />
+
+                  <div>
+                    <strong className='header-cart-title' onClick={(e) => handleNavigation(e, `/products/${item.productId}`)}>
+                      {item.name}
+                    </strong>
+                    <p>Size: {item.size}</p>
+                    <p>{item.price} RON</p>
+                  </div>
 
                   <button
-                     type='button'
-                     onClick={handleLogout}
-                     className='logout-button'
+                    type='button'
+                    className='delete-item'
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeGroupFromCart(item.productId, item.size);
+                      toast.success(`Produsul ${item.name} a fost șters din coș!`, { containerId: 'main-toast' });
+                    }}
                   >
-                     Logout
+                    <Trash2 size={20} />
                   </button>
-               </>
-            ) : (
-               <>
-                  <Link to='/products'>
-                     <button type='button' className='products'>
-                        Products
-                     </button>
-                  </Link>
-                  <Link to='/login' className='nav-link'>
-                     Login
-                  </Link>
-                  <Link to='/register' className='nav-link'>
-                     Register
-                  </Link>
-               </>
-            )}
+                </div>
+              ))}
 
-            {/* Cart Icon - doar dacă utilizatorul e logat */}
-            {token && (
-               <div
-                  className='cart-icon-wrapper'
-                  onClick={() => setShowCart(!showCart)}
-                  ref={iconRef}
-               >
-                  <ShoppingBag size={24} color='white' />
-                  {cartItems.length > 0 && (
-                     <span className='cart-badge'>{cartItems.length}</span>
-                  )}
-               </div>
-            )}
-         </nav>
+              <button type='button' className='view-bag-btn' onClick={(e) => handleNavigation(e, '/cart')}>
+                View Bag
+              </button>
 
-         {/* Cart popup - doar dacă utilizatorul e logat */}
-         {token && (
-            <div
-               className={`cart-popup ${showCart ? 'open' : ''}`}
-               ref={cartRef}
-            >
-               <div className='head'>
-                  <div className='close-right'>
-                     <button
-                        type='button'
-                        className='cart-close'
-                        onClick={() => setShowCart(false)}
-                     >
-                        &times;
-                     </button>
-                  </div>
-               </div>
-
-               {cartItems.length === 0 ? (
-                  <div className='empty-cart'>
-                     <h4>Empty bag</h4>
-                  </div>
-               ) : (
-                  <>
-                     <h4>Added to Bag</h4>
-                     {cartItems.map((item) => (
-                        <div className='cart-item' key={item._id}>
-                           <img src={item.image[0]} alt={item.name} />
-                           <div>
-                              <strong>{item.name}</strong>
-                              <p>{item.size}</p>
-                              <p>{item.price} RON</p>
-                           </div>
-                           <button
-                              className='delete-item'
-                              onClick={() =>
-                                 removeGroupFromCart(item.productId, item.size)
-                              }
-                           >
-                              <Trash2 size={20} />
-                           </button>
-                        </div>
-                     ))}
-
-                     <Link to='/cart'>
-                        <button
-                           type='button'
-                           className='view-bag-btn'
-                           onClick={() => setShowCart(false)}
-                        >
-                           View Bag
-                        </button>
-                     </Link>
-
-                     <Link to='/checkout'>
-                        <button type='button' className='header-checkout-btn'>
-                           Checkout
-                        </button>
-                     </Link>
-                  </>
-               )}
-            </div>
-         )}
-      </header>
-   );
+              <button type='button' className='header-checkout-btn' onClick={(e) => handleNavigation(e, '/checkout')}>
+                Checkout
+              </button>
+            </>
+          )}
+        </div>
+      )}
+    </header>
+  );
 };
 
 export default Header;

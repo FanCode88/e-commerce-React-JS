@@ -1,106 +1,122 @@
+/* Containerul principal care centrează formularul pe ecran */
 .register-container {
-   max-width: 400px;
-   margin: 3rem auto;
-   padding: 40px;
-   background-color: #f9fafb;
-   border-radius: 5px;
-   box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.13);
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* Titlul paginii */
 .register-title {
-   margin-bottom: 1rem;
-   font-size: 1.8rem;
-   font-weight: bold;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #111111;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
-.register-form {
-   display: flex;
-   flex-direction: column;
-   gap: 32px;
-}
-
-.register-form input {
-   padding: 0.5rem;
-   border: 1px solid #ddd;
-   font-size: 1rem;
-   border-radius: 5px;
-}
-
-.register-form button {
-   margin-top: 1rem;
-   padding: 0.6rem;
-   font-size: 1rem;
-   border: none;
-   border-radius: 5px;
-   cursor: pointer;
-   color: white;
-   background: #2563eb;
-}
-
-.register-form button:hover {
-   background: #0056b3;
-}
-
+/* Mesajele de eroare sau succes */
 .register-message {
-   text-align: center;
-   margin-bottom: 1rem;
-   color: #444;
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 500;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
 }
 
-@media screen and (max-width: 768px) {
-   .register-container {
-      padding: 30px 20px;
-      margin: 2rem 1rem;
-   }
-
-   .register-title {
-      font-size: 1.5rem;
-   }
-
-   .register-form {
-      gap: 24px;
-   }
-
-   .register-form input {
-      font-size: 0.95rem;
-      padding: 0.45rem;
-   }
-
-   .register-form button {
-      font-size: 0.95rem;
-      padding: 0.55rem;
-   }
-
-   .register-message {
-      font-size: 0.95rem;
-   }
+/* Structura formularului */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-@media screen and (max-width: 480px) {
-   .register-container {
-      padding: 20px 15px;
-      margin: 1.5rem 1rem;
-   }
+/* Stilul de bază pentru toate inputurile din formular */
+.register-form input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #333333;
+  background-color: #fafafa;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+  box-sizing: border-box;
+}
 
-   .register-title {
-      font-size: 1.3rem;
-   }
+/* Efectul de focus pe inputuri */
+.register-form input:focus {
+  outline: none;
+  border-color: #000000;
+  background-color: #ffffff;
+}
 
-   .register-form {
-      gap: 20px;
-   }
+/* Containerul relativ care suprapune inputul și butonul cu ochiul */
+.password-field-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
 
-   .register-form input {
-      font-size: 0.9rem;
-      padding: 0.4rem;
-   }
+/* Adăugăm padding în dreapta inputului de parolă pentru ca textul scris să nu intre sub ochi */
+.password-field-container input {
+  padding-right: 45px;
+}
 
-   .register-form button {
-      font-size: 0.9rem;
-      padding: 0.5rem;
-   }
+/* Butonul transparent încapsulat în interiorul inputului */
+.toggle-password-btn {
+  position: absolute;
+  right: 14px;
+  background: none !important;
+  border: none !important;
+  cursor: pointer;
+  color: #777777;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  z-index: 2;
+}
 
-   .register-message {
-      font-size: 0.9rem;
-   }
+/* Schimbarea culorii ochiului când utilizatorul trece cu mouse-ul peste el */
+.toggle-password-btn:hover {
+  color: #000000;
+  background: none !important;
+}
+
+.register-submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #000000; /* Design minimalist în stil Nike */
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.2s ease;
+}
+
+/* Efectul de hover pe butonul de Register */
+.register-submit-btn:hover {
+  background-color: #222222;
+}
+
+/* Dezactivarea butonului în timpul procesării rutei (opțional) */
+.register-submit-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }

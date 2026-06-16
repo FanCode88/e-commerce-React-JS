@@ -1,0 +1,176 @@
+/* === CONTAINERUL PRINCIPAL === */
+.admin-container {
+  padding: 3rem 2rem;
+  max-width: 1400px;
+  margin: auto;
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #111;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* === BARA DE CĂUTARE === */
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.admin-search-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 14px 20px;
+  font-size: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.admin-search-input:focus {
+  border-color: #333;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  background: #fff;
+}
+
+/* === TABELUL REFORMATAT MODEN === */
+.admin-table-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Permite scroll pe ecrane foarte mici ca să nu rupă design-ul */
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+/* 🔥 Protecție critică: Forțăm tabelul și rândurile să se comporte corect */
+.admin-table thead,
+.admin-table tbody,
+.admin-table tr {
+  display: table !important;
+  width: 100%;
+  table-layout: fixed; /* Împarte coloanele în mod egal și fix */
+}
+
+.admin-table th {
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.admin-table td {
+  padding: 20px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  color: #222;
+  vertical-align: middle;
+  word-wrap: break-word; /* Previne textul lung (precum ID-urile) să iasă din coloană */
+}
+
+.admin-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.admin-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* === LISTA DE PRODUSE DIN INTERIORUL CELULEI === */
+.admin-order-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-order-items-list li {
+  padding: 6px 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+}
+
+.admin-order-items-list li:last-child {
+  border-bottom: none;
+}
+
+/* === BADGE-URI STATUS === */
+.status-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.status-badge.pending {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+.status-badge.processing {
+  background-color: #e0f2fe;
+  color: #0284c7;
+}
+.status-badge.shipped {
+  background-color: #f3e8ff;
+  color: #7c3aed;
+}
+.status-badge.delivered {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+.status-badge.cancelled {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+/* === SELECT STATUS ADMIN === */
+.admin-status-select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+  max-width: 140px;
+  transition: border-color 0.2s;
+}
+
+.admin-status-select:focus {
+  border-color: #333;
+}
+
+/* === RESPONSIVENESS (Ajustări pentru ecrane medii/mici) === */
+@media (max-width: 1024px) {
+  .admin-table th,
+  .admin-table td {
+    padding: 12px 10px;
+    font-size: 0.85rem;
+  }
+}

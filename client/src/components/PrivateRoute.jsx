@@ -5,7 +5,7 @@ const PrivateRoute = ({ children }) => {
   const token = useSelector((state) => state.auth.token);
 
   if (!token) {
-    return <Navigate to="/login" />;
+    return <Navigate to='/login' />;
   }
 
   return children;

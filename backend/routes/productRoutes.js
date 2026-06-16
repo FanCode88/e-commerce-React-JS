@@ -1,12 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {
-   getAllProducts,
-   getProductById,
-   createProduct,
-   updateProduct,
-   deleteProduct,
-} = require('../controllers/productController');
+const { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct } = require('../controllers/productController');
 
 const { protect, isAdmin } = require('../middleware/authMiddleware');
 
@@ -15,12 +9,12 @@ const multer = require('multer');
 const path = require('path');
 
 const storage = multer.diskStorage({
-   destination: (req, file, cb) => {
-      cb(null, 'uploads/'); // salvează imaginile în folderul uploads/
-   },
-   filename: (req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
-   },
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // salvează imaginile în folderul uploads/
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
 });
 const upload = multer({ storage });
 
