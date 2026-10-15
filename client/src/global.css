@@ -6,13 +6,10 @@
 
 body {
   background: linear-gradient(140deg, #0f172a 0%, #1e1b4b 40%, #111827 70%, #090d16 100%);
-
   background-attachment: fixed;
   background-size: cover;
-
   color: #f1f5f9;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   min-height: 100vh;
 }
 

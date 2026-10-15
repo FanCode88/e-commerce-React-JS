@@ -1,0 +1,6 @@
+Frontend
+
+npm install -D nodemon
+npm install axios react-router-dom react-icons
+npm install @reduxjs/toolkit react-redux
+npm install react-slick slick-carousel

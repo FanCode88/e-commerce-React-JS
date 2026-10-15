@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
-import './ProductsPage.css';
-import { toast } from 'react-toastify';
-import { useCart } from '../components/Context/CartContext';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+import "./ProductsPage.css";
+import { toast } from "react-toastify";
+import { useCart } from "../components/Context/CartContext";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -24,7 +24,7 @@ const ProductsPage = () => {
   const location = useLocation();
 
   const queryParams = new URLSearchParams(location.search);
-  const category = queryParams.get('category');
+  const category = queryParams.get("category");
 
   useEffect(() => {
     fetchProducts();
@@ -33,48 +33,72 @@ const ProductsPage = () => {
 
   const fetchProducts = async () => {
     try {
-      let url = 'http://localhost:8000/api/products';
+      let url = "http://localhost:8000/api/products";
       if (category) url += `?category=${category}`;
 
       const res = await axios.get(url);
       setProducts(res.data);
     } catch (err) {
-      setError('Eroare la încărcarea produselor.');
+      setError("Eroare la încărcarea produselor.");
     } finally {
       setLoading(false);
     }
+  };
+
+  // Helper pentru formate corecte de URL (adaugă domeniul de backend dacă este o cale relativă)
+  const getMediaUrl = (path) => {
+    if (!path) return "";
+    if (typeof path !== "string") return "";
+
+    // Dacă este deja un URL extern (ex: Cloudinary, Unsplash etc.)
+    if (path.startsWith("http://") || path.startsWith("https://")) {
+      return path;
+    }
+
+    // Normalizare căi Windows (\ în /) și curățare slash inițial
+    const cleanPath = path.replace(/\\/g, "/").replace(/^\//, "");
+    return `http://localhost:8000/${cleanPath}`;
+  };
+
+  const isVideo = (media) => {
+    if (!media || typeof media !== "string") return false;
+
+    const videoExtensions = [".mp4", ".webm", ".ogg", ".mov", ".m4v", ".avif"];
+    const cleanUrl = media.split("?")[0].toLowerCase();
+
+    return videoExtensions.some((ext) => cleanUrl.endsWith(ext));
   };
 
   const handleAddToBag = async (e, product) => {
     e.stopPropagation();
 
     if (product.countInStock <= 0) {
-      toast.error('Acest... stoc epuizat!');
+      toast.error("Acest... stoc epuizat!");
       return;
     }
 
     const selectedSize = selectedSizes[product._id];
 
     if (!selectedSize) {
-      toast.warning('Selectează o mărime înainte de adăugare!', {
-        containerId: 'main-toast',
-        position: 'bottom-right',
+      toast.warning("Selectează o mărime înainte de adăugare!", {
+        containerId: "main-toast",
+        position: "bottom-right",
         autoClose: 3000,
       });
       return;
     }
 
     if (!user?._id) {
-      toast.warning('Trebuie să fii autentificat!', {
-        containerId: 'main-toast',
-        position: 'bottom-right',
+      toast.warning("Trebuie să fii autentificat!", {
+        containerId: "main-toast",
+        position: "bottom-right",
         autoClose: 3000,
       });
       return;
     }
 
     try {
-      await axios.post('http://localhost:8000/api/cart/add', {
+      await axios.post("http://localhost:8000/api/cart/add", {
         userId: user._id,
         productId: product._id,
         size: selectedSize,
@@ -84,8 +108,8 @@ const ProductsPage = () => {
       triggerCartRefresh();
 
       toast.success(`Produsul ${product.name} a fost adăugat în coș!`, {
-        containerId: 'main-toast',
-        position: 'bottom-right',
+        containerId: "main-toast",
+        position: "bottom-right",
         autoClose: 3000,
       });
 
@@ -95,8 +119,8 @@ const ProductsPage = () => {
       }, 800);
     } catch (err) {
       toast.error(`Stoc insuficient pentru ${product.name}!`, {
-        containerId: 'main-toast',
-        position: 'bottom-right',
+        containerId: "main-toast",
+        position: "bottom-right",
         autoClose: 3000,
       });
     }
@@ -110,7 +134,7 @@ const ProductsPage = () => {
   };
 
   const handleDelete = async (id, productName) => {
-    const confirmDelete = window.confirm('Ești sigur că vrei să ștergi produsul?');
+    const confirmDelete = window.confirm("Ești sigur că vrei să ștergi produsul?");
     if (!confirmDelete) return;
 
     try {
@@ -123,21 +147,21 @@ const ProductsPage = () => {
       setProducts((prev) => prev.filter((p) => p._id !== id));
 
       toast.success(`Produsul ${productName} a fost șters cu succes!`, {
-        containerId: 'main-toast',
-        position: 'bottom-right',
+        containerId: "main-toast",
+        position: "bottom-right",
         autoClose: 3000,
       });
     } catch (err) {
-      toast.error('Eroare la ștergerea produsului.', {
-        containerId: 'main-toast',
-        position: 'bottom-right',
+      toast.error("Eroare la ștergerea produsului.", {
+        containerId: "main-toast",
+        position: "bottom-right",
         autoClose: 3000,
       });
     }
   };
 
-  if (loading) return <div className='centered-container'>Se încarcă...</div>;
-  if (error) return <div className='centered-container'>{error}</div>;
+  if (loading) return <div className="centered-container">Se încarcă...</div>;
+  if (error) return <div className="centered-container">{error}</div>;
 
   const indexOfLast = currentPage * productsPerPage;
   const indexOfFirst = indexOfLast - productsPerPage;
@@ -146,39 +170,51 @@ const ProductsPage = () => {
 
   return (
     <>
-      <div className='container'>
-        <div className='grid'>
+      <div className="container">
+        <div className="grid">
           {currentProducts.map((product) => {
             const isOutOfStock = product.countInStock <= 0;
+
+            const rawMedia = Array.isArray(product.image)
+              ? product.image[0]
+              : Array.isArray(product.images)
+                ? product.images[0]
+                : product.image || product.images;
+
+            const mediaSource = getMediaUrl(rawMedia);
 
             return (
               <div
                 key={product._id}
-                className={`card ${isOutOfStock ? 'out-of-stock-card' : ''}`}
+                className={`card ${isOutOfStock ? "out-of-stock-card" : ""}`}
                 onClick={(e) => {
-                  if (e.target.closest('.admin-buttons') || e.target.closest('.add-to-bag-button') || e.target.closest('.size-selector'))
+                  if (e.target.closest(".admin-buttons") || e.target.closest(".add-to-bag-button") || e.target.closest(".size-selector"))
                     return;
 
                   navigate(`/products/${product._id}`);
                 }}
               >
-                {isOutOfStock && <div className='out-of-stock-badge'>Out of Stock</div>}
+                {isOutOfStock && <div className="out-of-stock-badge">Out of Stock</div>}
 
-                <img className='product-image' src={Array.isArray(product.image) ? product.image[0] : product.image} alt={product.name} />
+                {/* Randare dinamică cu URL procesat */}
+                {isVideo(mediaSource) ? (
+                  <video className="product-image" src={mediaSource} autoPlay loop muted playsInline />
+                ) : (
+                  <img className="product-image" src={mediaSource} alt={product.name} />
+                )}
 
-                <div className='card-content'>
-                  {/* 🔥 CORECTAT: Adăugat clasele tale originale din CSS pentru texte */}
-                  <h3 className='product-name'>{product.name}</h3>
-                  <div className='product-brand'>Brand: {product.brand}</div>
-                  <div className='product-description'>{product.description}</div>
+                <div className="card-content">
+                  <h3 className="product-name">{product.name}</h3>
+                  <div className="product-brand">Brand: {product.brand}</div>
+                  <div className="product-description">{product.description}</div>
 
                   <select
-                    className='size-selector'
-                    value={selectedSizes[product._id] || ''}
+                    className="size-selector"
+                    value={selectedSizes[product._id] || ""}
                     onChange={(e) => handleSizeChange(product._id, e.target.value)}
                     disabled={isOutOfStock}
                   >
-                    <option value=''>{isOutOfStock ? 'No sizes available' : 'Select size'}</option>
+                    <option value="">{isOutOfStock ? "No sizes available" : "Select size"}</option>
                     {!isOutOfStock &&
                       product.size?.map((s) => (
                         <option key={s} value={s}>
@@ -187,12 +223,12 @@ const ProductsPage = () => {
                       ))}
                   </select>
 
-                  <div className='product-price'>{product.price} RON</div>
+                  <div className="product-price">{product.price} RON</div>
 
                   {isAdmin && (
-                    <div className='admin-buttons'>
+                    <div className="admin-buttons">
                       <button
-                        className='edit-button'
+                        className="edit-button"
                         onClick={(e) => {
                           e.stopPropagation();
                           navigate(`/products/edit/${product._id}`);
@@ -202,7 +238,7 @@ const ProductsPage = () => {
                       </button>
 
                       <button
-                        className='delete-button'
+                        className="delete-button"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDelete(product._id, product.name);
@@ -215,20 +251,20 @@ const ProductsPage = () => {
                 </div>
 
                 <button
-                  className={`add-to-bag-button ${addedToBag[product._id] ? 'added' : ''}`}
+                  className={`add-to-bag-button ${addedToBag[product._id] ? "added" : ""}`}
                   onClick={(e) => handleAddToBag(e, product)}
                   disabled={isOutOfStock}
                 >
-                  {isOutOfStock ? 'Stoc epuizat' : addedToBag[product._id] ? 'Added!' : 'Add to Bag'}
+                  {isOutOfStock ? "Stoc epuizat" : addedToBag[product._id] ? "Added!" : "Add to Bag"}
                 </button>
               </div>
             );
           })}
         </div>
 
-        <div className='pagination'>
+        <div className="pagination">
           {[...Array(totalPages)].map((_, i) => (
-            <button key={i} className={currentPage === i + 1 ? 'active' : ''} onClick={() => setCurrentPage(i + 1)}>
+            <button key={i} className={currentPage === i + 1 ? "active" : ""} onClick={() => setCurrentPage(i + 1)}>
               {i + 1}
             </button>
           ))}

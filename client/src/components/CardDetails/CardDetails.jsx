@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { useCart } from '../Context/CartContext';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
-import './CardDetails.css';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useCart } from "../Context/CartContext";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./CardDetails.css";
 
 const CardDetails = () => {
   const { id } = useParams();
@@ -22,11 +21,19 @@ const CardDetails = () => {
         const res = await axios.get(`http://localhost:8000/api/products/${id}`);
         setProduct(res.data);
       } catch (err) {
-        console.error('Eroare la încărcarea produsului:', err);
+        console.error("Eroare la încărcarea produsului:", err);
       }
     };
     fetchProduct();
   }, [id]);
+
+  // Funcție de verificare dacă fișierul curent este un videoclip
+  const isVideo = (media) => {
+    if (!media || typeof media !== "string") return false;
+    const videoExtensions = [".mp4", ".webm", ".ogg", ".mov", ".m4v"];
+    const cleanUrl = media.split("?")[0].toLowerCase();
+    return videoExtensions.some((ext) => cleanUrl.endsWith(ext));
+  };
 
   const handlePrevImage = () => {
     if (!product?.image?.length) return;
@@ -44,31 +51,31 @@ const CardDetails = () => {
 
   const handleAddToCart = async () => {
     if (!product || product.countInStock <= 0) {
-      toast.error('Stoc indisponibil pentru acest produs!', {
-        position: 'bottom-right',
+      toast.error("Stoc indisponibil pentru acest produs!", {
+        position: "bottom-right",
         autoClose: 3000,
       });
       return;
     }
 
     if (!selectedSize) {
-      toast.warning('Te rugăm să selectezi o mărime înainte de a adăuga în coș!', {
-        position: 'bottom-right',
+      toast.warning("Te rugăm să selectezi o mărime înainte de a adăuga în coș!", {
+        position: "bottom-right",
         autoClose: 3000,
       });
       return;
     }
 
     if (!user?._id) {
-      toast.warning('Trebuie să fii autentificat pentru a adăuga în coș!', {
-        position: 'bottom-right',
+      toast.warning("Trebuie să fii autentificat pentru a adăuga în coș!", {
+        position: "bottom-right",
         autoClose: 3000,
       });
       return;
     }
 
     try {
-      await axios.post('http://localhost:8000/api/cart/add', {
+      await axios.post("http://localhost:8000/api/cart/add", {
         userId: user._id,
         productId: product._id,
         size: selectedSize,
@@ -76,15 +83,15 @@ const CardDetails = () => {
       });
 
       triggerCartRefresh();
-      toast.success('Produsul a fost adăugat în coș!', {
-        position: 'bottom-right',
+      toast.success("Produsul a fost adăugat în coș!", {
+        position: "bottom-right",
         autoClose: 3000,
       });
     } catch (err) {
-      console.error('Eroare la adăugarea în coș:', err);
+      console.error("Eroare la adăugarea în coș:", err);
       const serverError = err.response?.data?.message || err.response?.data?.error;
-      toast.error(serverError || 'Eroare la adăugarea în coș!', {
-        position: 'bottom-right',
+      toast.error(serverError || "Eroare la adăugarea în coș!", {
+        position: "bottom-right",
         autoClose: 3000,
       });
     }
@@ -93,23 +100,33 @@ const CardDetails = () => {
   if (!product) return <p>Se încarcă...</p>;
 
   const isOutOfStock = product.countInStock <= 0;
+  const currentMedia = product.image?.[currentImageIndex];
 
   return (
-    <div className='product-detail-container'>
-      <div className='image-section'>
+    <div className="product-detail-container">
+      <div className="image-section">
         {product.image?.length > 0 ? (
-          <div className='carousel-container'>
-            <button className='carousel-button left' onClick={handlePrevImage}>
-              &#8592;
-            </button>
+          <div className="carousel-container">
+            {product.image.length > 1 && (
+              <button className="carousel-button left" onClick={handlePrevImage}>
+                &#8592;
+              </button>
+            )}
 
-            <img src={product.image[currentImageIndex]} alt={product.name} className='card-details-image' />
+            {/* Verificare condiționată: Video vs Imagine */}
+            {isVideo(currentMedia) ? (
+              <video key={currentMedia} src={currentMedia} className="card-details-image" autoPlay loop muted playsInline />
+            ) : (
+              <img src={currentMedia} alt={product.name} className="card-details-image" />
+            )}
 
-            <button className='carousel-button right' onClick={handleNextImage}>
-              &#8594;
-            </button>
+            {product.image.length > 1 && (
+              <button className="carousel-button right" onClick={handleNextImage}>
+                &#8594;
+              </button>
+            )}
 
-            <div className='carousel-indicator'>
+            <div className="carousel-indicator">
               {currentImageIndex + 1} / {product.image.length}
             </div>
           </div>
@@ -118,7 +135,7 @@ const CardDetails = () => {
         )}
       </div>
 
-      <div className='info-section'>
+      <div className="info-section">
         <h2>{product.name}</h2>
         <p>
           <strong>Preț:</strong> {product.price} RON
@@ -131,13 +148,13 @@ const CardDetails = () => {
         </p>
 
         <div>
-          <strong style={{ color: 'orangered' }}>Mărimi disponibile:</strong>
+          <strong style={{ color: "orangered" }}>Mărimi disponibile:</strong>
           {product.size?.length ? (
-            <div className='size-selector-details'>
+            <div className="size-selector-details">
               {product.size.map((size) => (
                 <button
                   key={size}
-                  className={`size-button ${selectedSize === size ? 'selected' : ''}`}
+                  className={`size-button ${selectedSize === size ? "selected" : ""}`}
                   onClick={() => handleSizeSelect(size)}
                   disabled={isOutOfStock}
                 >
@@ -151,16 +168,16 @@ const CardDetails = () => {
         </div>
 
         <p>
-          <strong>Status:</strong>{' '}
+          <strong>Status:</strong>{" "}
           {isOutOfStock ? (
-            <span style={{ color: 'red', fontWeight: 'bold' }}>Stoc indisponibil</span>
+            <span style={{ color: "red", fontWeight: "bold" }}>Stoc indisponibil</span>
           ) : (
-            <span style={{ color: 'green', fontWeight: 'bold' }}>În stoc ({product.countInStock} buc.)</span>
+            <span style={{ color: "green", fontWeight: "bold" }}>În stoc ({product.countInStock} buc.)</span>
           )}
         </p>
 
-        <button className={`addBag ${isOutOfStock ? 'out-of-stock-btn' : ''}`} onClick={handleAddToCart} disabled={isOutOfStock}>
-          {isOutOfStock ? 'Out of Stock' : 'Add to Bag'}
+        <button className={`addBag ${isOutOfStock ? "out-of-stock-btn" : ""}`} onClick={handleAddToCart} disabled={isOutOfStock}>
+          {isOutOfStock ? "Out of Stock" : "Add to Bag"}
         </button>
         <ToastContainer />
       </div>

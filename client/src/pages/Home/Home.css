@@ -2,7 +2,7 @@
   background-color: #0b0c10;
   color: #ffffff;
   font-family:
-    'Inter',
+    "Inter",
     -apple-system,
     BlinkMacSystemFont,
     sans-serif;
@@ -111,6 +111,8 @@
   max-width: 1200px;
   margin: 6rem auto 4rem;
   padding: 0 20px;
+  position: relative;
+  overflow: visible;
 }
 
 .section-title-area {
@@ -135,18 +137,29 @@
   background: linear-gradient(90deg, #00e3cc, transparent);
 }
 
-.slider-item-padding {
-  padding: 15px;
+.slider-state-message {
+  color: #94a3b8;
+  text-align: center;
+  padding: 40px 0;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.slider-state-message.error {
+  color: #ff4d4d;
 }
 
 .product-card-creative {
   background: #161a24;
   border-radius: 4px;
   overflow: hidden;
-  display: block;
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
   text-decoration: none;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   border: 1px solid rgba(255, 255, 255, 0.03);
+  will-change: transform;
 }
 
 .product-img-container {
@@ -176,6 +189,7 @@
 
 .product-info-creative {
   padding: 20px;
+  flex-grow: 1;
 }
 
 .product-name-creative {
@@ -204,6 +218,7 @@
 .product-card-creative:hover img {
   transform: scale(1.08);
 }
+
 .product-card-creative:hover .view-product-link {
   color: #00e3cc;
 }
@@ -227,10 +242,11 @@
   overflow: hidden;
   border-radius: 4px;
   transition: transform 0.5s ease;
+  will-change: transform;
 }
 
 .collection-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -244,13 +260,13 @@
 }
 
 .collection-card.men::before {
-  background-image: url('/assets/1.png');
+  background-image: url("/assets/1.png");
 }
 .collection-card.women::before {
-  background-image: url('/assets/3.png');
+  background-image: url("/assets/3.png");
 }
 .collection-card.children::before {
-  background-image: url('/assets/2.png');
+  background-image: url("/assets/2.png");
 }
 
 .image-overlay-layer {
@@ -354,18 +370,132 @@
   line-height: 1.5;
 }
 
+/* =========================================================
+   STILIZARE & FIX-URI SLICK CAROUSEL
+   ========================================================= */
+
+.product-slider-creative {
+  position: relative;
+  padding: 0 10px;
+}
+
+.product-slider-creative .slick-list {
+  overflow: hidden !important;
+  margin: 0 -15px;
+}
+
+.product-slider-creative .slick-track {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.product-slider-creative .slick-slide {
+  float: none !important;
+  height: auto !important;
+  display: block !important;
+}
+
+.product-slider-creative .slick-slide > div {
+  height: 100%;
+}
+
+.slider-item-padding {
+  padding: 0 15px !important;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Stiluri Săgeți Navigation (React Icons Fix) */
+.product-slider-creative .slick-prev,
+.product-slider-creative .slick-next {
+  z-index: 20 !important;
+  width: 45px !important;
+  height: 45px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: rgba(11, 12, 16, 0.85) !important;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 227, 204, 0.4);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Ascundem caracterele din pseudoelemente ale temei implicite slick */
+.product-slider-creative .slick-prev:before,
+.product-slider-creative .slick-next:before {
+  display: none !important;
+}
+
+/* Stilizăm icoana React Icon SVG din interior */
+.product-slider-creative .slick-prev svg,
+.product-slider-creative .slick-next svg {
+  color: #00e3cc;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.product-slider-creative .slick-prev {
+  left: -20px !important;
+}
+
+.product-slider-creative .slick-next {
+  right: -20px !important;
+}
+
+/* Efect Hover pe Săgeți */
+.product-slider-creative .slick-prev:hover,
+.product-slider-creative .slick-next:hover {
+  background: #00e3cc !important;
+  border-color: #00e3cc;
+  box-shadow: 0 0 15px rgba(0, 227, 204, 0.5);
+}
+
+.product-slider-creative .slick-prev:hover svg,
+.product-slider-creative .slick-next:hover svg {
+  color: #0b0c10;
+}
+
+/* Stiluri Puncte (Dots) */
+.product-slider-creative .slick-dots {
+  bottom: -35px;
+}
+
+.product-slider-creative .slick-dots li button:before {
+  color: #ffffff !important;
+  opacity: 0.3;
+}
+
+.product-slider-creative .slick-dots li.slick-active button:before {
+  color: #00e3cc !important;
+  opacity: 1;
+}
+
+/* =========================================================
+   MEDIA QUERIES (RESPONSIVE)
+   ========================================================= */
+
 @media (max-width: 1024px) {
   .hero-video {
     padding-left: 5%;
     height: 70vh;
   }
+
   .video-overlay h1 {
     font-size: 2.8rem;
   }
+
   .collections-creative {
     grid-template-columns: 1fr;
     gap: 20px;
   }
+
   .collection-card {
     height: 380px;
   }
@@ -374,6 +504,7 @@
     grid-template-columns: 1fr;
     gap: 25px;
   }
+
   .benefit-utility-tab:not(:last-child) {
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -386,10 +517,20 @@
     height: 55vh;
     padding: 20px;
   }
+
   .video-overlay h1 {
     font-size: 2.2rem;
   }
+
   .product-img-container {
     height: 260px;
+  }
+
+  .product-slider-creative .slick-prev {
+    left: -10px !important;
+  }
+
+  .product-slider-creative .slick-next {
+    right: -10px !important;
   }
 }

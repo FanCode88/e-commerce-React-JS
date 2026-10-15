@@ -1,10 +1,10 @@
-const Product = require('../models/Product');
+const Product = require("../models/Product");
 
 // Obține toate produsele (cu opțional filtrare după categorie)
 exports.getAllProducts = async (req, res) => {
   try {
     const limit = parseInt(req.query.limit) || 0;
-    const sortDirection = req.query.sort === 'desc' ? -1 : 1;
+    const sortDirection = req.query.sort === "desc" ? -1 : 1;
     const category = req.query.category;
 
     let filter = {};
@@ -16,7 +16,7 @@ exports.getAllProducts = async (req, res) => {
 
     res.json(products);
   } catch (err) {
-    res.status(500).json({ message: 'Eroare la preluarea produselor' });
+    res.status(500).json({ message: "Eroare la preluarea produselor" });
   }
 };
 
@@ -25,11 +25,11 @@ exports.getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     if (!product) {
-      return res.status(404).json({ message: 'Produsul nu a fost găsit' });
+      return res.status(404).json({ message: "Produsul nu a fost găsit" });
     }
     res.json(product);
   } catch (err) {
-    res.status(500).json({ message: 'Eroare la preluarea produsului' });
+    res.status(500).json({ message: "Eroare la preluarea produsului" });
   }
 };
 
@@ -40,7 +40,7 @@ exports.createProduct = async (req, res) => {
     const size = req.body.size;
     const sizeArray = Array.isArray(size) ? size : size ? [size] : [];
 
-    const imagePaths = req.files?.map((file) => `${req.protocol}://${req.get('host')}/uploads/${file.filename}`) || [];
+    const imagePaths = req.files?.map((file) => `${req.protocol}://${req.get("host")}/uploads/${file.filename}`) || [];
 
     const newProduct = new Product({
       name,
@@ -56,20 +56,22 @@ exports.createProduct = async (req, res) => {
     const saved = await newProduct.save();
     res.status(201).json(saved);
   } catch (err) {
-    console.error('Eroare la createProduct:', err.message);
+    console.error("Eroare la createProduct:", err.message);
     res.status(400).json({
-      error: 'Eroare la salvare produs',
+      error: "Eroare la salvare produs",
       details: err.message,
     });
   }
 };
 
 // Actualizează un produs existent
-exports.updateProduct = async (req, res) => {
+// Actualizează un produs existent
+exports.updateProduct = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id);
+
     if (!product) {
-      return res.status(404).json({ message: 'Produsul nu a fost găsit' });
+      return res.status(404).json({ message: "Produsul nu a fost găsit." });
     }
 
     product.name = req.body.name || product.name;
@@ -77,21 +79,25 @@ exports.updateProduct = async (req, res) => {
     product.description = req.body.description || product.description;
     product.price = req.body.price || product.price;
     product.countInStock = req.body.countInStock || product.countInStock;
-    product.category = req.body.category || product.category;
+    if (req.body.category) product.category = req.body.category;
 
-    const size = req.body.size;
-    product.size = Array.isArray(size) ? size : size ? [size] : product.size;
+    // Actualizare mărimi dacă sunt trimise
+    if (req.body.size) {
+      const size = req.body.size;
+      product.size = Array.isArray(size) ? size : [size];
+    }
 
-    if (req.files?.length > 0) {
-      product.image = req.files.map((file) => `${req.protocol}://${req.get('host')}/uploads/${file.filename}`);
-    } else if (req.body.image) {
-      product.image = Array.isArray(req.body.image) ? req.body.image : [req.body.image];
+    // Preluăm pozele noi dacă au fost încărcate
+    if (req.files && req.files.length > 0) {
+      const newImages = req.files.map((file) => `${req.protocol}://${req.get("host")}/uploads/${file.filename}`);
+      // Salvăm pe proprietatea 'image' (aceeași ca la createProduct)
+      product.image = newImages;
     }
 
     const updatedProduct = await product.save();
     res.json(updatedProduct);
-  } catch (err) {
-    res.status(500).json({ message: 'Eroare la actualizare produs' });
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -99,8 +105,8 @@ exports.updateProduct = async (req, res) => {
 exports.deleteProduct = async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: 'Produs șters' });
+    res.status(200).json({ message: "Produs șters" });
   } catch (err) {
-    res.status(500).json({ message: 'Eroare la ștergere produs' });
+    res.status(500).json({ message: "Eroare la ștergere produs" });
   }
 };
