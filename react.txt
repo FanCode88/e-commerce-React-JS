@@ -8,8 +8,3 @@ npm install mongoose
 npm install --save-dev nodemon
 
 
-jonnnyionut
-
-Dm2bkGw7NM4vCRQe
-
-fancode

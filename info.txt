@@ -7,4 +7,5 @@ npm install react-slick slick-carousel
 
 
 
-"JetBrains Mono, Menlo, Monaco, monospace",
+npm install cloudinary@latest multer-storage-cloudinary@latest nodemon@latest --save-dev
+
