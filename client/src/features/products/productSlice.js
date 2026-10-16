@@ -1,26 +1,26 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 // Fetch produse din backend
-export const fetchProducts = createAsyncThunk('products/fetch', async () => {
-  const res = await axios.get('http://localhost:8000/api/products');
+export const fetchProducts = createAsyncThunk("products/fetch", async () => {
+  const res = await axios.get("http://localhost:8000/api/products");
   return res.data;
 });
 
 const productSlice = createSlice({
-  name: 'products',
+  name: "products",
   initialState: {
     items: [],
-    status: 'idle',
+    status: "idle",
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status = "succeeded";
         state.items = action.payload;
       });
   },

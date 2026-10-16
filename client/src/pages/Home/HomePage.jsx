@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import api from "../../api.js";
 import { FaTruck, FaUndoAlt, FaShieldAlt, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.css";
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 // Săgeți personalizate curate
 const SampleNextArrow = ({ className, onClick }) => (
@@ -34,7 +32,8 @@ const HomePage = () => {
     const fetchNewProducts = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${API_BASE_URL}/api/products?limit=6&sort=desc`);
+        // Folosește instanța 'api' configurată centralizat
+        const res = await api.get("/products?limit=6&sort=desc");
         if (isMounted) {
           setNewProducts(res.data);
           setError(null);
@@ -120,13 +119,15 @@ const HomePage = () => {
         ) : error ? (
           <div className="slider-state-message error">{error}</div>
         ) : newProducts.length > 0 ? (
-          <Slider {...sliderSettings} className="product-slider-creative">
-            {newProducts.map((product) => {
-              const imageSrc = Array.isArray(product.image) ? product.image[0] : product.image;
-              const formattedPrice = typeof product.price === "number" ? product.price.toFixed(2) : product.price;
+          newProducts.length === 1 ? (
+            /* Dacă există un singur produs, afișăm un card fix, frumos centrat fără carusel */
+            <div style={{ maxWidth: "350px", margin: "0 auto" }}>
+              {(() => {
+                const product = newProducts[0];
+                const imageSrc = Array.isArray(product.image) ? product.image[0] : product.image;
+                const formattedPrice = typeof product.price === "number" ? product.price.toFixed(2) : product.price;
 
-              return (
-                <div key={product._id} className="slider-item-padding">
+                return (
                   <Link to={`/products/${product._id}`} className="product-card-creative">
                     <div className="product-img-container">
                       <img src={imageSrc} alt={product.name} loading="lazy" />
@@ -139,10 +140,35 @@ const HomePage = () => {
                       <span className="view-product-link">VEZI DETALII</span>
                     </div>
                   </Link>
-                </div>
-              );
-            })}
-          </Slider>
+                );
+              })()}
+            </div>
+          ) : (
+            /* Dacă sunt 2 sau mai multe produse, folosیم caruselul Slick normal */
+            <Slider {...sliderSettings} className="product-slider-creative">
+              {newProducts.map((product) => {
+                const imageSrc = Array.isArray(product.image) ? product.image[0] : product.image;
+                const formattedPrice = typeof product.price === "number" ? product.price.toFixed(2) : product.price;
+
+                return (
+                  <div key={product._id} className="slider-item-padding">
+                    <Link to={`/products/${product._id}`} className="product-card-creative">
+                      <div className="product-img-container">
+                        <img src={imageSrc} alt={product.name} loading="lazy" />
+                        <div className="price-badge">{formattedPrice} RON</div>
+                      </div>
+                      <div className="product-info-creative">
+                        <p className="product-name-creative" title={product.name}>
+                          {product.name}
+                        </p>
+                        <span className="view-product-link">VEZI DETALII</span>
+                      </div>
+                    </Link>
+                  </div>
+                );
+              })}
+            </Slider>
+          )
         ) : (
           <div className="slider-state-message">Nu există produse noi disponibile.</div>
         )}

@@ -8,6 +8,7 @@ const productSchema = new mongoose.Schema(
     description: String,
     size: [String],
     image: [String],
+    video: { type: String },
     countInStock: Number,
     category: {
       type: String,

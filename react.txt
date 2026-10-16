@@ -1,0 +1,15 @@
+npm create vite@latest nume-proiect -- --template react
+cd nume-proiect
+npm install
+npm run dev
+
+
+npm install mongoose
+npm install --save-dev nodemon
+
+
+jonnnyionut
+
+Dm2bkGw7NM4vCRQe
+
+fancode

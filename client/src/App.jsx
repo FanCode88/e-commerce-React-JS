@@ -1,38 +1,38 @@
-import React from 'react';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import Header from './components/Header/HeaderPage';
-import LoginPage from './pages/Login/LoginPage';
-import RegisterPage from './pages/Register/RegisterPage';
-import ProductsPage from './pages/ProductsPage';
-import HomePage from './pages/Home/HomePage';
-import PrivateRoute from './components/PrivateRoute';
-import AddProduct from './components/Add/AddProduct';
-import AdminRoute from './components/AdminRoute';
-import CardEdit from './components/Card/CardEdit';
-import CardDetails from './components/CardDetails/CardDetails';
-import CartPage from './components/Cart/CartPage';
-import Checkout from './components/Checkout/Checkout';
-import { CartProvider } from './components/Context/CartContext';
-import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
+import Header from "./components/Header/HeaderPage";
+import LoginPage from "./pages/Login/LoginPage";
+import RegisterPage from "./pages/Register/RegisterPage";
+import ProductsPage from "./pages/ProductsPage";
+import HomePage from "./pages/Home/HomePage";
+import PrivateRoute from "./components/PrivateRoute";
+import AddProduct from "./components/Add/AddProduct";
+import AdminRoute from "./components/AdminRoute";
+import CardEdit from "./components/Card/CardEdit";
+import CardDetails from "./components/CardDetails/CardDetails";
+import CartPage from "./components/Cart/CartPage";
+import Checkout from "./components/Checkout/Checkout";
+import { CartProvider } from "./components/Context/CartContext";
+import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 
 function App() {
   return (
     <CartProvider>
       <BrowserRouter>
-        <ToastContainer position='bottom-right' autoClose={3000} containerId='main-toast' />
+        <ToastContainer position="bottom-right" autoClose={3000} containerId="main-toast" />
 
         <Header />
 
         <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/register' element={<RegisterPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
 
           <Route
-            path='/products'
+            path="/products"
             element={
               <PrivateRoute>
                 <ProductsPage />
@@ -41,7 +41,7 @@ function App() {
           />
 
           <Route
-            path='/products/:id'
+            path="/products/:id"
             element={
               <PrivateRoute>
                 <CardDetails />
@@ -50,7 +50,7 @@ function App() {
           />
 
           <Route
-            path='/cart'
+            path="/cart"
             element={
               <PrivateRoute>
                 <CartPage />
@@ -59,7 +59,7 @@ function App() {
           />
 
           <Route
-            path='/checkout'
+            path="/checkout"
             element={
               <PrivateRoute>
                 <Checkout />
@@ -68,7 +68,7 @@ function App() {
           />
 
           <Route
-            path='/add-product'
+            path="/add-product"
             element={
               <AdminRoute>
                 <AddProduct />
@@ -77,7 +77,7 @@ function App() {
           />
 
           <Route
-            path='/products/edit/:id'
+            path="/products/edit/:id"
             element={
               <AdminRoute>
                 <CardEdit />
@@ -86,7 +86,7 @@ function App() {
           />
 
           <Route
-            path='/admin/dashboard'
+            path="/admin/dashboard"
             element={
               <AdminRoute>
                 <AdminDashboard />
@@ -94,7 +94,7 @@ function App() {
             }
           />
 
-          <Route path='*' element={<Navigate to='/' replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </CartProvider>

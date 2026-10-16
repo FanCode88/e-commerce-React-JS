@@ -1,0 +1,150 @@
+.cyber-footer-container {
+  width: 100%;
+  background: #0b0c10;
+  color: #ffffff;
+  border-top: 1px solid rgba(0, 227, 204, 0.1);
+  margin-top: 4rem;
+}
+
+/* BENEFITS BAR */
+
+.cyber-footer-benefits {
+  width: 100%;
+  background: #0d0f14;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.benefits-inner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+}
+
+.benefit-utility-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 28px;
+}
+
+.benefit-utility-tab:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.utility-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00e3cc;
+  min-width: 34px;
+}
+
+.utility-text-box h4 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.utility-text-box p {
+  margin: 6px 0 0;
+  color: #7b8ba8;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* BOTTOM BAR */
+
+.cyber-footer-bottom-bar {
+  width: 100%;
+  background: #06070a;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cyber-footer-bottom-content {
+  width: 100%;
+  max-width: 1200px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.cyber-footer-bottom-content p {
+  margin: 0;
+  color: #ffffff;
+}
+
+.cyber-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.cyber-footer-links a,
+.cyber-footer-links a:visited,
+.cyber-footer-links a:link,
+.cyber-footer-links a:active {
+  color: #00e3cc;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.cyber-footer-links a:hover {
+  color: #ffffff;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .benefits-inner-container {
+    flex-direction: column;
+  }
+
+  .benefit-utility-tab {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .benefit-utility-tab:last-child {
+    border-bottom: none;
+  }
+
+  .cyber-footer-bottom-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cyber-footer-links {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+.benefit-utility-tab {
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.benefit-utility-tab:hover {
+  background: rgba(0, 227, 204, 0.05);
+}
+
+.benefit-utility-tab:hover .utility-icon-box {
+  color: #00e3cc;
+}
+
+.benefit-utility-tab:hover h4 {
+  color: #00e3cc;
+}

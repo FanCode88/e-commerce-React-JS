@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import api from "../api.js";
 import "./ProductsPage.css";
 import { toast } from "react-toastify";
 import { useCart } from "../components/Context/CartContext";
@@ -33,31 +33,17 @@ const ProductsPage = () => {
 
   const fetchProducts = async () => {
     try {
-      let url = "http://localhost:8000/api/products";
-      if (category) url += `?category=${category}`;
+      let endpoint = "/products";
+      if (category) endpoint += `?category=${category}`;
 
-      const res = await axios.get(url);
+      // Folosim instanța 'api' configurată centralizat
+      const res = await api.get(endpoint);
       setProducts(res.data);
     } catch (err) {
       setError("Eroare la încărcarea produselor.");
     } finally {
       setLoading(false);
     }
-  };
-
-  // Helper pentru formate corecte de URL (adaugă domeniul de backend dacă este o cale relativă)
-  const getMediaUrl = (path) => {
-    if (!path) return "";
-    if (typeof path !== "string") return "";
-
-    // Dacă este deja un URL extern (ex: Cloudinary, Unsplash etc.)
-    if (path.startsWith("http://") || path.startsWith("https://")) {
-      return path;
-    }
-
-    // Normalizare căi Windows (\ în /) și curățare slash inițial
-    const cleanPath = path.replace(/\\/g, "/").replace(/^\//, "");
-    return `http://localhost:8000/${cleanPath}`;
   };
 
   const isVideo = (media) => {
@@ -73,7 +59,7 @@ const ProductsPage = () => {
     e.stopPropagation();
 
     if (product.countInStock <= 0) {
-      toast.error("Acest... stoc epuizat!");
+      toast.error("Acest produs are stocul epuizat!");
       return;
     }
 
@@ -98,7 +84,8 @@ const ProductsPage = () => {
     }
 
     try {
-      await axios.post("http://localhost:8000/api/cart/add", {
+      // Folosim tot instanța 'api' pentru adăugarea în coș
+      await api.post("/cart/add", {
         userId: user._id,
         productId: product._id,
         size: selectedSize,
@@ -138,11 +125,7 @@ const ProductsPage = () => {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:8000/api/products/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await api.delete(`/products/${id}`);
 
       setProducts((prev) => prev.filter((p) => p._id !== id));
 
@@ -175,32 +158,26 @@ const ProductsPage = () => {
           {currentProducts.map((product) => {
             const isOutOfStock = product.countInStock <= 0;
 
-            const rawMedia = Array.isArray(product.image)
-              ? product.image[0]
-              : Array.isArray(product.images)
-                ? product.images[0]
-                : product.image || product.images;
-
-            const mediaSource = getMediaUrl(rawMedia);
+            // Extragem direct primul element din array-ul de imagini de la Cloudinary
+            const imageSrc = Array.isArray(product.image) && product.image.length > 0 ? product.image[0] : product.image || "";
 
             return (
               <div
                 key={product._id}
                 className={`card ${isOutOfStock ? "out-of-stock-card" : ""}`}
                 onClick={(e) => {
-                  if (e.target.closest(".admin-buttons") || e.target.closest(".add-to-bag-button") || e.target.closest(".size-selector"))
-                    return;
+                  if (e.target.closest(".admin-buttons") || e.target.closest(".add-to-bag-button") || e.target.closest(".size-selector")) return;
 
                   navigate(`/products/${product._id}`);
                 }}
               >
                 {isOutOfStock && <div className="out-of-stock-badge">Out of Stock</div>}
 
-                {/* Randare dinamică cu URL procesat */}
-                {isVideo(mediaSource) ? (
-                  <video className="product-image" src={mediaSource} autoPlay loop muted playsInline />
+                {/* Randare media direct de la Cloudinary */}
+                {isVideo(imageSrc) ? (
+                  <video className="product-image" src={imageSrc} autoPlay loop muted playsInline />
                 ) : (
-                  <img className="product-image" src={mediaSource} alt={product.name} />
+                  <img className="product-image" src={imageSrc} alt={product.name} />
                 )}
 
                 <div className="card-content">
