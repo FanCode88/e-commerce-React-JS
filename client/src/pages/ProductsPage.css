@@ -159,6 +159,7 @@
   width: 75%;
   padding: 12px;
   background: #ffffff;
+  color: #0f172a !important;
   border: none;
   border-radius: 50px;
   font-weight: 800;
@@ -186,7 +187,6 @@
 
 .add-to-bag-button.added {
   background: #00e3cc !important;
-  color: #0f172a !important;
   opacity: 1 !important;
   transform: translateX(-50%) !important;
 }

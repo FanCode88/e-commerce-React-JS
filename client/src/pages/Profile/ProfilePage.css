@@ -1,0 +1,350 @@
+.profile-page-cyber {
+  background: #0b0c10;
+  color: #ffffff;
+  min-height: 85vh;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-container {
+  max-width: 1100px;
+  width: 100%;
+}
+
+.profile-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 20px;
+}
+
+.profile-header-section h1 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+.profile-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 227, 204, 0.1);
+  border: 1px solid rgba(0, 227, 204, 0.3);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #00e3cc;
+  letter-spacing: 1px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #00e3cc;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00e3cc;
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Layout pe coloane */
+.profile-grid-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 25px;
+}
+
+/* Card Principal */
+.profile-main-card {
+  background: #161a24;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 35px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.profile-avatar-box {
+  position: relative;
+  width: 75px;
+  height: 75px;
+  background: rgba(0, 227, 204, 0.08);
+  border: 1px solid rgba(0, 227, 204, 0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00e3cc;
+  margin-bottom: 30px;
+}
+
+.avatar-glow {
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, #00e3cc, transparent);
+  border-radius: 12px;
+  z-index: -1;
+  opacity: 0.3;
+  filter: blur(5px);
+}
+
+.profile-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-info-item {
+  background: rgba(11, 12, 16, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 14px 18px;
+  border-radius: 6px;
+}
+
+.info-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #94a3b8;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.info-label svg {
+  color: #00e3cc;
+}
+
+.info-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.info-value.highlight {
+  color: #00e3cc;
+}
+
+.admin-glow {
+  text-shadow: 0 0 10px rgba(0, 227, 204, 0.4);
+}
+
+/* Panou Lateral Scurtături */
+.profile-sidebar-panel {
+  background: #161a24;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-sidebar-panel h3 {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #94a3b8;
+  margin: 0 0 20px 0;
+}
+
+.profile-quick-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quick-link-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(11, 12, 16, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 14px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.quick-link-icon {
+  width: 38px;
+  height: 38px;
+  background: rgba(0, 227, 204, 0.1);
+  border: 1px solid rgba(0, 227, 204, 0.2);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00e3cc;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.quick-link-text {
+  flex-grow: 1;
+}
+
+.quick-link-text span {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.quick-link-text p {
+  margin: 0;
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.quick-arrow {
+  color: #64748b;
+  transition: all 0.3s ease;
+}
+
+.quick-link-card:hover {
+  background: rgba(22, 26, 36, 0.95);
+  border-color: rgba(0, 227, 204, 0.4);
+  transform: translateX(4px);
+}
+
+.quick-link-card:hover .quick-link-icon {
+  background: #00e3cc;
+  color: #0b0c10;
+  box-shadow: 0 0 10px rgba(0, 227, 204, 0.5);
+}
+
+.quick-link-card:hover .quick-arrow {
+  color: #00e3cc;
+  transform: translateX(3px);
+}
+
+.admin-shortcut {
+  border-color: rgba(255, 77, 79, 0.2);
+}
+
+.admin-shortcut .quick-link-icon {
+  background: rgba(255, 77, 79, 0.1);
+  border-color: rgba(255, 77, 79, 0.3);
+  color: #ff4d4f;
+}
+
+.admin-shortcut:hover {
+  border-color: rgba(255, 77, 79, 0.5);
+}
+
+.admin-shortcut:hover .quick-link-icon {
+  background: #ff4d4f;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 77, 79, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .profile-grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profile-left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.profile-password-card {
+  background: #161a24;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.profile-password-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #00e3cc;
+  margin: 0 0 20px 0;
+}
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group-cyber {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group-cyber label {
+  font-size: 11px;
+  color: #94a3b8;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.form-group-cyber input {
+  background: rgba(11, 12, 16, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 14px;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-group-cyber input:focus {
+  border-color: #00e3cc;
+  box-shadow: 0 0 10px rgba(0, 227, 204, 0.2);
+}
+
+.cyber-save-btn {
+  margin-top: 10px;
+  background: #00e3cc;
+  color: #0b0c10;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 227, 204, 0.3);
+  transition: all 0.3s ease;
+}
+
+.cyber-save-btn:hover {
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.4);
+}

@@ -1,0 +1,75 @@
+.info-page-cyber {
+  background: #0b0c10;
+  color: #ffffff;
+  min-height: 80vh;
+  padding: 80px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-container {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.cyber-tag {
+  color: #00e3cc;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.info-container h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 40px;
+  letter-spacing: -1px;
+}
+
+.info-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.info-card {
+  background: #161a24;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 30px 24px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.info-card:hover {
+  border-color: rgba(0, 227, 204, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.info-icon {
+  color: #00e3cc;
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.info-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.info-card p {
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .info-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}

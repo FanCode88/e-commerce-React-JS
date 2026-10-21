@@ -1,10 +1,10 @@
-const Cart = require('../models/Cart');
-const Product = require('../models/Product');
+const Cart = require("../models/Cart");
+const Product = require("../models/Product");
 
 // 1. OBȚINE COȘUL UTILIZATORULUI
 exports.getUserCart = async (req, res) => {
   try {
-    const cart = await Cart.findOne({ userId: req.params.userId }).populate('items.productId');
+    const cart = await Cart.findOne({ userId: req.params.userId }).populate("items.productId");
     if (!cart) return res.json({ items: [] });
 
     const validItems = cart.items.filter((item) => item.productId);
@@ -23,8 +23,8 @@ exports.getUserCart = async (req, res) => {
         productId: product?._id,
         size: item.size,
         quantity: actualQuantity,
-        name: product?.name || 'N/A',
-        description: product?.description || '',
+        name: product?.name || "N/A",
+        description: product?.description || "",
         price: product?.price || 0,
         image: product?.image || [],
       };
@@ -32,8 +32,8 @@ exports.getUserCart = async (req, res) => {
 
     res.json({ items: transformedItems });
   } catch (err) {
-    console.error('Eroare getUserCart:', err);
-    res.status(500).json({ message: 'Eroare la preluarea coșului' });
+    console.error("Eroare getUserCart:", err);
+    res.status(500).json({ message: "Eroare la preluarea coșului" });
   }
 };
 
@@ -43,7 +43,7 @@ exports.addToCart = async (req, res) => {
 
   try {
     const product = await Product.findById(productId);
-    if (!product) return res.status(404).json({ message: 'Produsul nu mai există' });
+    if (!product) return res.status(404).json({ message: "Produsul nu mai există" });
 
     if (product.countInStock < quantity) {
       return res.status(400).json({ message: `Stoc limitat! Mai sunt doar ${product.countInStock} bucăți.` });
@@ -69,7 +69,7 @@ exports.addToCart = async (req, res) => {
     await cart.save();
     res.status(200).json(cart);
   } catch (err) {
-    res.status(500).json({ message: 'Eroare la adăugarea în coș' });
+    res.status(500).json({ message: "Eroare la adăugarea în coș" });
   }
 };
 
@@ -79,10 +79,10 @@ exports.removeFromCart = async (req, res) => {
 
   try {
     const cart = await Cart.findOne({ userId });
-    if (!cart) return res.status(404).json({ message: 'Coșul nu există' });
+    if (!cart) return res.status(404).json({ message: "Coșul nu există" });
 
     const item = cart.items.find((item) => item._id.toString() === itemId);
-    if (!item) return res.status(404).json({ message: 'Item-ul nu există' });
+    if (!item) return res.status(404).json({ message: "Item-ul nu există" });
 
     if (item.quantity > 1) {
       item.quantity -= 1;
@@ -93,7 +93,7 @@ exports.removeFromCart = async (req, res) => {
     await cart.save();
     res.json(cart);
   } catch (err) {
-    res.status(500).json({ message: 'Eroare la ștergerea item-ului' });
+    res.status(500).json({ message: "Eroare la ștergerea item-ului" });
   }
 };
 
@@ -103,13 +103,13 @@ exports.increaseQuantity = async (req, res) => {
 
   try {
     const cart = await Cart.findOne({ userId });
-    if (!cart) return res.status(404).json({ message: 'Coșul nu există' });
+    if (!cart) return res.status(404).json({ message: "Coșul nu există" });
 
     const item = cart.items.find((i) => i.productId.toString() === productId && i.size === size);
-    if (!item) return res.status(404).json({ message: 'Produsul nu există în coș' });
+    if (!item) return res.status(404).json({ message: "Produsul nu există în coș" });
 
     const product = await Product.findById(productId);
-    if (!product) return res.status(404).json({ message: 'Produsul nu mai este disponibil' });
+    if (!product) return res.status(404).json({ message: "Produsul nu mai este disponibil" });
 
     if (item.quantity + 1 > product.countInStock) {
       return res.status(400).json({
@@ -122,7 +122,7 @@ exports.increaseQuantity = async (req, res) => {
 
     return res.json(cart);
   } catch (err) {
-    return res.status(500).json({ message: 'Eroare la creșterea cantității' });
+    return res.status(500).json({ message: "Eroare la creșterea cantității" });
   }
 };
 
@@ -132,14 +132,14 @@ exports.removeGroupFromCart = async (req, res) => {
 
   try {
     const cart = await Cart.findOne({ userId });
-    if (!cart) return res.status(404).json({ message: 'Coșul nu există' });
+    if (!cart) return res.status(404).json({ message: "Coșul nu există" });
 
     cart.items = cart.items.filter((item) => item.productId.toString() !== productId || item.size !== size);
 
     await cart.save();
-    res.json({ message: 'Grup șters cu succes', cart });
+    res.json({ message: "Grup șters cu succes", cart });
   } catch (err) {
-    res.status(500).json({ message: 'Eroare la ștergerea grupului' });
+    res.status(500).json({ message: "Eroare la ștergerea grupului" });
   }
 };
 
@@ -149,9 +149,9 @@ exports.clearCart = async (req, res) => {
 
   try {
     await Cart.findOneAndUpdate({ userId }, { $set: { items: [] } });
-    res.status(200).json({ message: 'Coș golit cu succes.' });
+    res.status(200).json({ message: "Coș golit cu succes." });
   } catch (err) {
-    console.error('Eroare la golirea coșului:', err);
-    res.status(500).json({ error: 'Eroare la golirea coșului.' });
+    console.error("Eroare la golirea coșului:", err);
+    res.status(500).json({ error: "Eroare la golirea coșului." });
   }
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../api.js";
-import { FaTruck, FaUndoAlt, FaShieldAlt, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaTruck, FaUndoAlt, FaShieldAlt, FaChevronLeft, FaChevronRight, FaArrowRight } from "react-icons/fa";
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
@@ -107,7 +107,7 @@ const HomePage = () => {
         <div className="hero-bottom-gradient"></div>
       </section>
 
-      {/* 2. PRODUSE NOI (SLIDER BRUTALIST) */}
+      {/* 2. PRODUSE NOI (SLIDER / CARD INDIVIDUAL) */}
       <section className="new-arrivals">
         <div className="section-title-area">
           <h2>PRODUSE NOI</h2>
@@ -144,7 +144,7 @@ const HomePage = () => {
               })()}
             </div>
           ) : (
-            /* Dacă sunt 2 sau mai multe produse, folosیم caruselul Slick normal */
+            /* Dacă sunt 2 sau mai multe produse, folosim caruselul Slick normal */
             <Slider {...sliderSettings} className="product-slider-creative">
               {newProducts.map((product) => {
                 const imageSrc = Array.isArray(product.image) ? product.image[0] : product.image;
@@ -201,38 +201,66 @@ const HomePage = () => {
         </Link>
       </section>
 
-      {/* 4. ZONE BENEFICII JOS */}
+      {/* 4. ZONE BENEFICII JOS (FUTURISTIC & INTERACTIV) */}
       <section className="benefits-bottom-bar">
+        <div className="benefits-glow-grid"></div>
         <div className="benefits-inner-container">
-          <div className="benefit-utility-tab">
+          {/* Card 1: Livrare */}
+          <Link to="/shipping" className="benefit-utility-tab">
+            <div className="tab-corner-accent top-left"></div>
+            <div className="tab-corner-accent bottom-right"></div>
+
             <div className="utility-icon-box">
-              <FaTruck size={20} />
+              <FaTruck size={22} />
+              <span className="icon-pulse-ring"></span>
             </div>
+
             <div className="utility-text-box">
-              <h4>LIVRARE TOATĂ ȚARA</h4>
+              <div className="benefit-header-tag">
+                <h4>LIVRARE TOATĂ ȚARA</h4>
+                <FaArrowRight className="card-arrow-icon" />
+              </div>
               <p>În 24-48h, gratuit peste 299 RON</p>
             </div>
-          </div>
+          </Link>
 
-          <div className="benefit-utility-tab">
+          {/* Card 2: Retur */}
+          <Link to="/returns" className="benefit-utility-tab">
+            <div className="tab-corner-accent top-left"></div>
+            <div className="tab-corner-accent bottom-right"></div>
+
             <div className="utility-icon-box">
-              <FaUndoAlt size={18} />
+              <FaUndoAlt size={20} />
+              <span className="icon-pulse-ring"></span>
             </div>
+
             <div className="utility-text-box">
-              <h4>RETUR ȘI SCHIMBURI</h4>
+              <div className="benefit-header-tag">
+                <h4>RETUR ȘI SCHIMBURI</h4>
+                <FaArrowRight className="card-arrow-icon" />
+              </div>
               <p>30 de zile, procesare rapidă fără bătăi de cap</p>
             </div>
-          </div>
+          </Link>
 
-          <div className="benefit-utility-tab">
+          {/* Card 3: Securitate */}
+          <Link to="/security" className="benefit-utility-tab">
+            <div className="tab-corner-accent top-left"></div>
+            <div className="tab-corner-accent bottom-right"></div>
+
             <div className="utility-icon-box">
-              <FaShieldAlt size={18} />
+              <FaShieldAlt size={20} />
+              <span className="icon-pulse-ring"></span>
             </div>
+
             <div className="utility-text-box">
-              <h4>SISTEM DE PLATĂ SECURIZAT</h4>
+              <div className="benefit-header-tag">
+                <h4>SISTEM DE PLATĂ SECURIZAT</h4>
+                <FaArrowRight className="card-arrow-icon" />
+              </div>
               <p>Criptare SSL avansată 3D Secure</p>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
     </div>

@@ -1,13 +1,9 @@
-/* ==========================================================================
-   ⚡ DESIGN INTERACTIV - CART PAGE (Calibrat pentru trecere Dark fluidă)
-   ========================================================================== */
-
 .cartPage {
   max-width: 1200px;
   margin: auto;
   padding: 2rem;
-  color: #f8fafc; /* Alb-crem mat, foarte odihnitor pentru ochi */
-  background-color: rgba(15, 23, 42, 0.96); /* Gri-petrol închis, identic cu pagina de produse */
+  color: #f8fafc;
+  background-color: rgba(15, 23, 42, 0.96);
 }
 
 .cartPage h2 {
@@ -20,7 +16,7 @@
 .empty-message {
   text-align: center;
   font-size: 1.2rem;
-  color: #94a3b8; /* Gri discret pentru mesajul de coș gol */
+  color: #94a3b8;
   margin-top: 3rem;
 }
 
@@ -42,10 +38,10 @@
   flex-wrap: wrap;
   gap: 1.5rem;
   align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Border foarte fin, eliminat cel alb strident */
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   padding: 1.5rem;
-  background-color: #1e293b; /* Nuanța mai deschisă pentru carduri, oferă profunzime */
+  background-color: #1e293b;
   box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.25);
   position: relative;
   padding-right: 5rem;
@@ -58,14 +54,14 @@
   min-width: 130px;
   min-height: 130px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 4px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition: opacity 0.2s ease;
 }
 
 .cart-item-row img:hover {
-  opacity: 0.85;
+  opacity: 0.86;
 }
 
 .details {
@@ -94,7 +90,7 @@
 
 .cart-product-link:hover {
   text-decoration: underline;
-  color: #00e3cc; /* Accentuare cu cianul tău semnătură la hover */
+  color: #00e3cc;
 }
 
 /* Capsula de ștergere - adaptată cromatic pentru mod închis */
@@ -103,14 +99,13 @@
   right: 1.5rem;
   top: 50%;
   transform: translateY(-50%);
-
   width: 40px;
   height: 100px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-  background: #0f172a !important; /* Fundal închis organic */
+  background: #0f172a !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: 50px;
-  color: #94a3b8; /* Pictograma nu mai sare agresiv în ochi */
+  color: #94a3b8;
   cursor: pointer;
   padding: 4px;
   display: flex;
@@ -124,7 +119,7 @@
 
 .delete-item-btn:hover {
   color: #ffffff;
-  background-color: #dc2626 !important; /* Devine roșie la interacțiune pentru siguranță UX */
+  background-color: #dc2626 !important;
   border-color: #dc2626 !important;
 }
 
@@ -137,17 +132,17 @@
 
 .details p {
   margin: 0;
-  color: #94a3b8; /* Gri elegant pentru detalii secundare */
+  color: #94a3b8;
   font-size: 16px;
 }
 
 .details p strong {
-  color: #f1f5f9; /* Etichetele (ex: Cantitate) devin clar vizibile */
+  color: #f1f5f9;
 }
 
 /* REZUMAT COȘ */
 .cart-summary {
-  background: #1e293b; /* Integrat perfect cu stilul cardurilor */
+  background: #1e293b;
   border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 2rem;
   border-radius: 8px;
@@ -175,7 +170,7 @@
 
 .total-highlight {
   font-size: 24px;
-  color: #00e3cc; /* Evidențiere modernă prin cianul tău caracteristic */
+  color: #00e3cc;
   font-weight: bold;
   border-top: 1px dashed rgba(255, 255, 255, 0.1);
   padding-top: 1rem;
@@ -188,7 +183,7 @@
   max-width: 300px;
   padding: 14px;
   margin-top: 1rem;
-  background: #ffffff; /* Buton alb contrastant pentru importanță primară */
+  background: #ffffff;
   color: #0f172a;
   border: none;
   border-radius: 6px;
@@ -201,7 +196,7 @@
 }
 
 .checkout-btn:hover {
-  background: #00e3cc; /* Devine cian electric la hover, la fel ca pe restul site-ului */
+  background: #00e3cc;
   box-shadow: 0 0 20px rgba(0, 227, 204, 0.4);
 }
 
@@ -222,7 +217,7 @@
   justify-content: space-between;
   padding: 4px 8px;
   border-radius: 20px;
-  background-color: #0f172a; /* Fundal adâncit pentru zona de control */
+  background-color: #0f172a;
   border: 1px solid rgba(255, 255, 255, 0.08);
   width: 110px;
   height: 36px;
@@ -252,11 +247,16 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.quantity-btn:hover,
-.remove-btn:hover {
+.quantity-btn:hover {
   background-color: #00e3cc;
   color: #0f172a;
   border-color: #00e3cc;
+}
+
+.remove-btn:hover {
+  background-color: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
 }
 
 .quantity-btn:disabled,

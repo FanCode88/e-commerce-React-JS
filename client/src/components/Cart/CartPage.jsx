@@ -136,7 +136,7 @@ const CartPage = () => {
                     <div className="quantity-wrapper">
                       <button
                         type="button"
-                        className="remove-btn"
+                        className={group.quantity === 1 ? "remove-btn" : "quantity-btn"}
                         disabled={actionLoading}
                         onClick={() => handleQuantityChange("decrease", group)}
                       >
@@ -145,12 +145,7 @@ const CartPage = () => {
 
                       <span className="quantity-value">{group.quantity}</span>
 
-                      <button
-                        type="button"
-                        className="quantity-btn"
-                        disabled={actionLoading}
-                        onClick={() => handleQuantityChange("increase", group)}
-                      >
+                      <button type="button" className="quantity-btn" disabled={actionLoading} onClick={() => handleQuantityChange("increase", group)}>
                         +
                       </button>
                     </div>

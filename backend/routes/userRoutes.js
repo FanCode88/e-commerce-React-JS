@@ -9,11 +9,31 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "30d" });
 };
 
+// Middleware pentru protejarea rutelor private
+const protect = async (req, res, next) => {
+  let token;
+  if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
+    try {
+      token = req.headers.authorization.split(" ")[1];
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = await User.findById(decoded.id).select("-password");
+      if (!req.user) {
+        return res.status(401).json({ message: "Utilizatorul nu a fost găsit" });
+      }
+      next();
+    } catch (error) {
+      return res.status(401).json({ message: "Token nevalid sau expirat" });
+    }
+  } else {
+    return res.status(401).json({ message: "Lipsesc acreditările de acces (fără token)" });
+  }
+};
+
 // Înregistrare utilizator
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password, isAdmin } = req.body; // adaugă isAdmin
-    const user = new User({ name, email, password, isAdmin }); // folosește isAdmin
+    const { name, email, password, isAdmin } = req.body;
+    const user = new User({ name, email, password, isAdmin });
     await user.save();
 
     res.status(201).json({
@@ -49,6 +69,45 @@ router.post("/login", async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ message: "Eroare server", error: err.message });
+  }
+});
+
+// RUTĂ NOUĂ: Schimbare parolă
+// RUTĂ: Schimbare parolă cu validări complete
+router.put("/change-password", protect, async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ message: "Te rugăm să completezi toate câmpurile." });
+    }
+
+    // 1. Validare lungime minimă
+    if (newPassword.length < 6) {
+      return res.status(400).json({ message: "Noua parolă este prea scurtă! Trebuie să aibă cel puțin 6 caractere." });
+    }
+
+    // 2. Validare parolă identică
+    if (currentPassword === newPassword) {
+      return res.status(400).json({ message: "Noua parolă nu poate fi identică cu parola actuală!" });
+    }
+
+    // Preluăm utilizatorul din DB
+    const user = await User.findById(req.user._id);
+
+    // 3. Verificare parolă veche
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Parola actuală introdusă este incorectă." });
+    }
+
+    // Actualizare parolă
+    user.password = newPassword;
+    await user.save();
+
+    res.status(200).json({ message: "Parola a fost schimbată cu succes!" });
+  } catch (err) {
+    res.status(500).json({ message: "Eroare la schimbarea parolei.", error: err.message });
   }
 });
 
