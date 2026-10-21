@@ -1,6 +1,7 @@
 const Order = require("../models/Order");
 const Cart = require("../models/Cart");
 const Product = require("../models/Product");
+const User = require("../models/User");
 
 const createOrder = async (req, res) => {
   const { userId, items, email, firstName, lastName, address, phone, paymentMethod, total } = req.body;
@@ -89,14 +90,34 @@ const cancelOrder = async (req, res) => {
   }
 };
 
-// 3. Preluare toate comenzile
+// 3. Preluare comenzi cu paginare și date populate corect
 const getAllOrders = async (req, res) => {
   try {
-    const orders = await Order.find().populate("items.productId").sort({ createdAt: -1 });
-    res.status(200).json(orders);
-  } catch (err) {
-    console.error("Eroare la preluarea comenzilor:", err);
-    res.status(500).json({ message: "Eroare la preluarea comenzilor pentru Admin." });
+    const pageSize = Number(req.query.limit) || 10;
+    const page = Number(req.query.page) || 1;
+
+    const count = await Order.countDocuments({});
+
+    const orders = await Order.find({})
+      .populate("userId", "name email")
+      .populate({
+        path: "items.productId",
+        select: "name price image",
+      })
+      .sort({ createdAt: -1 })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+
+    // Corectat: am scos litera 's' de la începutul obiectului JSON
+    res.status(200).json({
+      orders,
+      page,
+      pages: Math.ceil(count / pageSize),
+      totalOrders: count,
+    });
+  } catch (error) {
+    console.error("Eroare la preluarea comenzilor:", error);
+    res.status(500).json({ message: "Eroare la preluarea comenzilor", error: error.message });
   }
 };
 
