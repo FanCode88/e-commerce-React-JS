@@ -23,6 +23,9 @@ import ReturnsPage from "./pages/info/ReturnsPage";
 import SecurityPage from "./pages/info/SecurityPage";
 import ProfilePage from "./pages/Profile/ProfilePage";
 
+import PrivacyPage from "./components/Footer/PrivacyPage/PrivacyPage";
+import TermsPage from "./components/Footer/TermsPage/TermsPage";
+
 function App() {
   return (
     <CartProvider>
@@ -104,6 +107,9 @@ function App() {
               <Route path="/shipping" element={<ShippingPage />} />
               <Route path="/returns" element={<ReturnsPage />} />
               <Route path="/security" element={<SecurityPage />} />
+
+              <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
 
               <Route
                 path="/profile"
