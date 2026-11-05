@@ -72,7 +72,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// RUTĂ NOUĂ: Schimbare parolă
 // RUTĂ: Schimbare parolă cu validări complete
 router.put("/change-password", protect, async (req, res) => {
   try {

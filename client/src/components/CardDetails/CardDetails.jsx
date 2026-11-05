@@ -27,6 +27,18 @@ const CardDetails = () => {
     fetchProduct();
   }, [id]);
 
+  // Preluăm lista de media în siguranță (fie că e product.images, product.image, sau un singur string)
+  const getMediaList = () => {
+    if (!product) return [];
+    const media = product.images || product.image;
+    if (Array.isArray(media)) return media;
+    if (typeof media === "string") return [media];
+    return [];
+  };
+
+  const mediaList = getMediaList();
+  const currentMedia = mediaList[currentImageIndex];
+
   // Funcție de verificare dacă fișierul curent este un videoclip
   const isVideo = (media) => {
     if (!media || typeof media !== "string") return false;
@@ -36,13 +48,13 @@ const CardDetails = () => {
   };
 
   const handlePrevImage = () => {
-    if (!product?.image?.length) return;
-    setCurrentImageIndex((prev) => (prev === 0 ? product.image.length - 1 : prev - 1));
+    if (!mediaList.length) return;
+    setCurrentImageIndex((prev) => (prev === 0 ? mediaList.length - 1 : prev - 1));
   };
 
   const handleNextImage = () => {
-    if (!product?.image?.length) return;
-    setCurrentImageIndex((prev) => (prev === product.image.length - 1 ? 0 : prev + 1));
+    if (!mediaList.length) return;
+    setCurrentImageIndex((prev) => (prev === mediaList.length - 1 ? 0 : prev + 1));
   };
 
   const handleSizeSelect = (size) => {
@@ -100,34 +112,33 @@ const CardDetails = () => {
   if (!product) return <p>Se încarcă...</p>;
 
   const isOutOfStock = product.countInStock <= 0;
-  const currentMedia = product.image?.[currentImageIndex];
 
   return (
     <div className="product-detail-container">
       <div className="image-section">
-        {product.image?.length > 0 ? (
+        {mediaList.length > 0 ? (
           <div className="carousel-container">
-            {product.image.length > 1 && (
+            {mediaList.length > 1 && (
               <button className="carousel-button left" onClick={handlePrevImage}>
                 &#8592;
               </button>
             )}
 
-            {/* Verificare condiționată: Video vs Imagine */}
+            {/* Verificare condiționată: Video vs Imagine (inclusiv AVIF) */}
             {isVideo(currentMedia) ? (
-              <video key={currentMedia} src={currentMedia} className="card-details-image" autoPlay loop muted playsInline />
+              <video key={currentMedia} src={currentMedia} className="card-details-image" autoPlay loop muted playsInline controls />
             ) : (
               <img src={currentMedia} alt={product.name} className="card-details-image" />
             )}
 
-            {product.image.length > 1 && (
+            {mediaList.length > 1 && (
               <button className="carousel-button right" onClick={handleNextImage}>
                 &#8594;
               </button>
             )}
 
             <div className="carousel-indicator">
-              {currentImageIndex + 1} / {product.image.length}
+              {currentImageIndex + 1} / {mediaList.length}
             </div>
           </div>
         ) : (

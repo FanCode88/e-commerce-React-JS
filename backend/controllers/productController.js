@@ -33,18 +33,15 @@ exports.getProductById = async (req, res) => {
   }
 };
 
-// Creează un produs nou (cu Cloudinary pentru imagini și video)
+// Creează un produs nou (preia toate fișierele din req.files trimise de upload.array)
 exports.createProduct = async (req, res) => {
   try {
     const { name, brand, price, description, countInStock, category } = req.body;
     const size = req.body.size;
     const sizeArray = Array.isArray(size) ? size : size ? [size] : [];
 
-    // Preluăm link-urile de la Cloudinary pentru imagini
-    const imagePaths = req.files?.images ? req.files.images.map((file) => file.path) : [];
-
-    // Preluăm link-ul de la Cloudinary pentru video (dacă există)
-    const videoPath = req.files?.video ? req.files.video[0].path : "";
+    // req.files este un array direct când folosim upload.array("images", 10)
+    const mediaPaths = req.files ? req.files.map((file) => file.path) : [];
 
     const newProduct = new Product({
       name,
@@ -54,8 +51,7 @@ exports.createProduct = async (req, res) => {
       countInStock,
       category,
       size: sizeArray,
-      image: imagePaths,
-      video: videoPath, // Salvăm și link-ul video
+      image: mediaPaths, 
     });
 
     const saved = await newProduct.save();
@@ -91,14 +87,9 @@ exports.updateProduct = async (req, res, next) => {
       product.size = Array.isArray(size) ? size : [size];
     }
 
-    // Actualizăm imaginile de pe Cloudinary dacă au fost încărcate altele noi
-    if (req.files && req.files.images && req.files.images.length > 0) {
-      product.image = req.files.images.map((file) => file.path);
-    }
-
-    // Actualizăm videoclipul de pe Cloudinary dacă a fost încărcat unul nou
-    if (req.files && req.files.video && req.files.video.length > 0) {
-      product.video = req.files.video[0].path;
+    // Actualizăm fișierele (imagini/video noi) dacă au fost trimise
+    if (req.files && req.files.length > 0) {
+      product.image = req.files.map((file) => file.path);
     }
 
     const updatedProduct = await product.save();

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom"; // 1. Am adăugat useNavigate
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./AddProduct.css";
 import { toast, ToastContainer } from "react-toastify";
@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 const AddProduct = () => {
   const { user, token } = useSelector((state) => state.auth);
   const fileInputRef = useRef(null);
-  const navigate = useNavigate(); // 2. Inițializare useNavigate
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -81,7 +81,7 @@ const AddProduct = () => {
       // 3. Redirecționare după o scurtă pauză (1.5s) pentru a vedea notificarea
       setTimeout(() => {
         navigate("/products");
-      }, 1500);
+      }, 1000);
     } catch (err) {
       toast.error(err.response?.data?.message || "Eroare la adăugarea produsului.");
     }
@@ -124,7 +124,7 @@ const AddProduct = () => {
 
         <button type="submit">Add product</button>
       </form>
-      <ToastContainer position="bottom-right" autoClose={3000} />
+      <ToastContainer position="bottom-right" autoClose={2000} />
     </div>
   );
 };

@@ -167,6 +167,9 @@
   height: 320px;
   background: #0b0c10;
   overflow: hidden;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  transform: translateZ(0);
 }
 
 .product-card-creative img {
@@ -174,6 +177,12 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
+  backface-visibility: hidden;
+}
+
+/* Facem zoom pe container sau pe imagine direct, dar păstrăm masca */
+.product-card-creative:hover img {
+  transform: scale(1.08);
 }
 
 .price-badge {
@@ -210,13 +219,9 @@
 }
 
 .product-card-creative:hover {
-  transform: translateY(-8px);
   border-color: rgba(0, 227, 204, 0.3);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-}
-
-.product-card-creative:hover img {
-  transform: scale(1.08);
+  overflow: hidden;
 }
 
 .product-card-creative:hover .view-product-link {
@@ -408,15 +413,16 @@
   box-sizing: border-box;
 }
 
-/* Stiluri Săgeți Navigation (React Icons Fix) */
+/* Stiluri Săgeți Navigation aliniate pe mijlocul imaginii (320px / 2 = 160px sus) */
 .product-slider-creative .slick-prev,
 .product-slider-creative .slick-next {
   z-index: 20 !important;
   width: 45px !important;
   height: 45px !important;
-  top: 50% !important;
+  top: 160px !important;
   transform: translateY(-50%) !important;
   background: rgba(11, 12, 16, 0.85) !important;
+  color: #ffff !important;
   border-radius: 50%;
   border: 1px solid rgba(0, 227, 204, 0.4);
   display: flex !important;
@@ -442,11 +448,11 @@
 }
 
 .product-slider-creative .slick-prev {
-  left: -20px !important;
+  left: 15px !important;
 }
 
 .product-slider-creative .slick-next {
-  right: -20px !important;
+  right: 15px !important;
 }
 
 /* Efect Hover pe Săgeți */
@@ -475,64 +481,6 @@
 .product-slider-creative .slick-dots li.slick-active button:before {
   color: #00e3cc !important;
   opacity: 1;
-}
-
-/* =========================================================
-   MEDIA QUERIES (RESPONSIVE)
-   ========================================================= */
-
-@media (max-width: 1024px) {
-  .hero-video {
-    padding-left: 5%;
-    height: 70vh;
-  }
-
-  .video-overlay h1 {
-    font-size: 2.8rem;
-  }
-
-  .collections-creative {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .collection-card {
-    height: 380px;
-  }
-
-  .benefits-inner-container {
-    grid-template-columns: 1fr;
-    gap: 25px;
-  }
-
-  .benefit-utility-tab:not(:last-child) {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    padding-bottom: 20px;
-  }
-}
-
-@media (max-width: 600px) {
-  .hero-video {
-    height: 55vh;
-    padding: 20px;
-  }
-
-  .video-overlay h1 {
-    font-size: 2.2rem;
-  }
-
-  .product-img-container {
-    height: 260px;
-  }
-
-  .product-slider-creative .slick-prev {
-    left: -10px !important;
-  }
-
-  .product-slider-creative .slick-next {
-    right: -10px !important;
-  }
 }
 
 .benefits-bottom-bar {
@@ -710,12 +658,154 @@
   opacity: 1;
 }
 
-/* RESPONSIVE */
+/* =========================================================
+   MEDIA QUERIES & OPTIMIZĂRI MOBILE / TABLETE
+   ========================================================= */
+
+/* Tablete (între 900px și 1200px) */
+@media (max-width: 1200px) {
+  .hero-video {
+    padding-left: 6%;
+  }
+
+  .collections-creative {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 0 15px;
+  }
+
+  .collection-card {
+    height: 400px;
+    padding: 30px;
+  }
+
+  .collection-content h3 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Tablete mici și dispozitive medii (sub 1024px) */
 @media (max-width: 1024px) {
+  .hero-video {
+    padding-left: 5%;
+    height: 70vh;
+  }
+
+  .video-overlay h1 {
+    font-size: 2.8rem;
+  }
+
+  .collections-creative {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .collection-card {
+    height: 350px;
+  }
+
   .benefits-inner-container {
     grid-template-columns: 1fr;
     gap: 16px;
   }
+
+  .benefit-utility-tab:not(:last-child) {
+    border-right: none;
+    border-bottom: none;
+    padding-bottom: 20px;
+  }
 }
 
-/* last */
+/* Telefoane mobile (sub 768px) */
+@media (max-width: 768px) {
+  .hero-video {
+    height: 60vh;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .video-overlay {
+    max-width: 100%;
+  }
+
+  .video-overlay h1 {
+    font-size: 2.3rem;
+    line-height: 1.2;
+  }
+
+  .video-overlay p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .shop-now {
+    padding: 14px 28px;
+    font-size: 12px;
+  }
+
+  .new-arrivals {
+    margin: 4rem auto 3rem;
+    padding: 0 15px;
+  }
+
+  .section-title-area {
+    margin-bottom: 2rem;
+  }
+
+  .new-arrivals h2 {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+  }
+
+  .product-img-container {
+    height: 280px;
+  }
+
+  /* Poziționarea săgeților pe mobil pentru a nu ieși din ecran */
+  .product-slider-creative .slick-prev {
+    left: -5px !important;
+  }
+
+  .product-slider-creative .slick-next {
+    right: -5px !important;
+  }
+
+  .collections-creative {
+    margin: 3rem auto 4rem;
+    padding: 0 15px;
+  }
+
+  .collection-card {
+    height: 280px;
+    padding: 25px;
+  }
+
+  .collection-content h3 {
+    font-size: 1.6rem;
+  }
+
+  .benefits-bottom-bar {
+    padding: 30px 0;
+  }
+}
+
+/* Telefoane foarte înguste (sub 480px) */
+@media (max-width: 480px) {
+  .video-overlay h1 {
+    font-size: 2rem;
+  }
+
+  .product-img-container {
+    height: 240px;
+  }
+
+  .benefit-utility-tab {
+    padding: 18px 15px;
+    gap: 14px;
+  }
+
+  .utility-icon-box {
+    width: 44px;
+    height: 44px;
+  }
+}

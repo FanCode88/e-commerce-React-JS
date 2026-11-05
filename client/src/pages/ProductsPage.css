@@ -268,36 +268,75 @@
   box-shadow: 0 0 15px rgba(0, 227, 204, 0.4);
 }
 
+/* ========================================= */
+/* ADAPTABILITATE TABLETE ȘI MOBILE          */
+/* ========================================= */
+
+/* Tablete (ecrane între 900px și 1200px) - 3 coloane */
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Tablete mici / dispozitive medium (între 768px și 900px) - 2 coloane */
 @media (max-width: 900px) {
   .container {
     padding: 1rem;
   }
   .grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
   .product-image {
-    height: 280px;
+    height: 180px;
   }
   .card-content {
-    padding-bottom: 1.2rem;
+    padding: 0.9rem;
+    padding-bottom: 60px;
   }
 }
 
 @media (max-width: 600px) {
+  .container {
+    padding: 0.75rem;
+  }
+
   .grid {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
+
   .product-image {
-    height: 240px;
+    height: 220px;
   }
+
+  .card-content {
+    padding: 1rem;
+    padding-bottom: 65px;
+  }
+
+  .add-to-bag-button {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    width: 85%;
+    padding: 10px;
+  }
+
   .size-selector {
     max-width: 100%;
     width: 100%;
+    padding: 10px;
   }
+
   .admin-buttons {
-    flex-direction: column;
-    gap: 6px;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .edit-button,
+  .delete-button {
+    padding: 0.7rem;
   }
 }
 

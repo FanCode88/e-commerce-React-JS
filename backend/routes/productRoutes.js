@@ -19,11 +19,12 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "products",
-    resource_type: "auto", // Detectează automat dacă este imagine sau video
-    allowed_formats: ["jpg", "png", "jpeg", "webp", "mp4", "mov", "avi"], // Formate permise incluzând video
+    resource_type: "auto",
+    allowed_formats: ["jpg", "png", "jpeg", "webp", "avif", "mp4", "mov", "avi", "webm"],
   },
 });
 
+// Folosim upload.array în loc de upload.fields, deoarece în React trimiți totul sub cheia "images"
 const upload = multer({ storage: storage });
 
 // Rute
@@ -34,10 +35,7 @@ router.post(
   "/",
   protect,
   isAdmin,
-  upload.fields([
-    { name: "images", maxCount: 10 },
-    { name: "video", maxCount: 1 },
-  ]),
+  upload.array("images", 10),
   createProduct,
 );
 
@@ -45,10 +43,7 @@ router.put(
   "/:id",
   protect,
   isAdmin,
-  upload.fields([
-    { name: "images", maxCount: 10 },
-    { name: "video", maxCount: 1 },
-  ]),
+  upload.array("images", 10), 
   updateProduct,
 );
 
