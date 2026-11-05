@@ -165,3 +165,127 @@
     text-align: center;
   }
 }
+
+/* FAQ */
+.faq-page-container {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 0 20px;
+  color: #ffffff;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.faq-header h1 {
+  font-size: 2.3rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.faq-header .title-line {
+  width: 80px;
+  height: 2px;
+  background: #00e3cc;
+  margin: 0 auto 15px;
+}
+
+.faq-header p {
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+.faq-sections-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.faq-category-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #00e3cc;
+  margin-bottom: 1.2rem;
+  border-left: 3px solid #00e3cc;
+  padding-left: 12px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: rgba(22, 26, 36, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.faq-item:hover {
+  border-color: rgba(0, 227, 204, 0.4);
+}
+
+.faq-question {
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.faq-question h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+.faq-icon {
+  color: #00e3cc;
+  font-size: 13px;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.3s ease;
+  padding: 0 22px;
+}
+
+.faq-item.active .faq-answer-wrapper {
+  max-height: 250px;
+  padding: 0 22px 20px 22px;
+}
+
+.faq-answer {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.93rem;
+  line-height: 1.6;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 15px;
+}

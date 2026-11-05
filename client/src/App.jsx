@@ -25,6 +25,7 @@ import ProfilePage from "./pages/Profile/ProfilePage";
 
 import PrivacyPage from "./components/Footer/PrivacyPage/PrivacyPage";
 import TermsPage from "./components/Footer/TermsPage/TermsPage";
+import FAQPage from "./components/Footer/FAQPage";
 
 function App() {
   return (
@@ -110,6 +111,7 @@ function App() {
 
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/terms" element={<TermsPage />} />
+              <Route path="/faq" element={<FAQPage />} />
 
               <Route
                 path="/profile"
